@@ -5,7 +5,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CT extends JFrame {
+public class Client_T extends JFrame {
     //MyListener ml = new MyListener();
 
     JFrame CTFrame = new JFrame();
@@ -13,7 +13,7 @@ public class CT extends JFrame {
     JButton btnSign = new JButton("신호 공간");
     JButton btnAdd = new JButton("기능 추가 공간");
 
-    CT() {
+    Client_T() {
         CTFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         CTFrame.setTitle("VOS - Client T");
         CTFrame.setSize(500, 300);
@@ -26,7 +26,7 @@ public class CT extends JFrame {
     }
 
     public static void main(String[] args) {
-        CT exe = new CT();
+        Client_T CT = new Client_T();
     }
 
     /*class MyListener implements ActionListener {
