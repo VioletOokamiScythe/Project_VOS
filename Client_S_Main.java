@@ -5,6 +5,6 @@ import javax.swing.event.*;
 
 public class Client_S_Main {
     public static void main(String[] args) {
-
+        
     }
 }
