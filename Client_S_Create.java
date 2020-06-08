@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class Create_S extends JFrame {
+public class Client_S_Create extends JFrame {
 
     // 중앙 패널 및 컴포넌트 생성
     JPanel CenterPanel = new JPanel(new FlowLayout());
@@ -27,7 +27,7 @@ public class Create_S extends JFrame {
     JButton b1 = new JButton("Create");
     JButton b2 = new JButton("Cancel");
 
-    Create_S() {
+    Client_S_Create() {
 
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,6 +80,6 @@ public class Create_S extends JFrame {
     }
 
     public static void main(String[] args) {
-        Create_S CS = new Create_S();
+        Client_S_Create CSC = new Client_S_Create();
     }
 }

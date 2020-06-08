@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class CP extends JFrame{
+public class Cilent_P_Create extends JFrame{
   /* CP GUI */
-	CP(){
+  Cilent_P_Create(){
 	JPanel P = new JPanel();
 	Label l1 =new Label("Professor ID");
 	Label l2 =new Label("Professor PW");
@@ -56,7 +56,7 @@ public class CP extends JFrame{
 		
 	}
 	public static void main(String[] args) {
-		CP CP=new CP();
+		Cilent_P_Create CP=new Cilent_P_Create();
 	}
 
 }
