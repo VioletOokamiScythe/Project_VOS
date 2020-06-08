@@ -1,5 +1,3 @@
-package CPLogin;
-
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -12,7 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-public class CP_P_Login extends JFrame{
+public class Client_P_Login extends JFrame{
 
 	JLabel lbl,la1,la2,la3;
     JTextField id;
@@ -20,7 +18,7 @@ public class CP_P_Login extends JFrame{
     JPanel idPanel,paPanel,loginPanel;
     JButton b1,b2,b3;
     JTextArea content;
-	public CP_P_Login() {
+	public Client_P_Login() {
 		super( "VOS-Client P Login" );
 		setLayout( new FlowLayout() );  //플로우 레이아웃 사용
 		
@@ -67,7 +65,7 @@ public class CP_P_Login extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new CP_P_Login();
+		new Client_P_Login();
 
 	}
 
