@@ -4,6 +4,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 
-public class Client_P_INROOM {
+public class Client_P_INROOM extends JFrame{
     
 }
