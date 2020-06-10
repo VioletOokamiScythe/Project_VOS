@@ -4,6 +4,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 
-public class Client_S_Save extends JFrame{
+public class Client_S_SAVE extends JFrame{
     
 }
