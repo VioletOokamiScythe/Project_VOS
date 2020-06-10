@@ -13,7 +13,7 @@ import javax.swing.border.EtchedBorder;
 
 public class Client_P_Login extends JFrame{
 
-	P_Login_Action pla = new P_Login_Action();
+	P_Login_Action PLA = new P_Login_Action();
 	JLabel lbl,la1,la2,la3;
     JTextField id;
     JPasswordField passwd;
@@ -51,9 +51,9 @@ public class Client_P_Login extends JFrame{
         loginPanel = new JPanel();
        
         b2 = new JButton("Login");
-	b2.addActionListener(pla);
+	b2.addActionListener(PLA);
         b3= new JButton("Create");
-	b3.addActionListener(pla);
+	b3.addActionListener(PLA);
         loginPanel.add( b2 );
         loginPanel.add( b3 );
         add(idPanel);
