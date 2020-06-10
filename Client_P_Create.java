@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class Client_P_Create extends JFrame {
 
-	P_Create_Action pla = new P_Create_Action();
+	P_Create_Action PCA = new P_Create_Action();
 	TextField t1 = new TextField();
 	TextField t2 = new TextField();
 	TextField t3 = new TextField();
@@ -37,9 +37,9 @@ public class Client_P_Create extends JFrame {
 
 		t3.setEchoChar('*');
 		add(j1);
-		j1.addActionListener(pla);
+		j1.addActionListener(PCA);
 		add(j2);
-		j2.addActionListener(pla);
+		j2.addActionListener(PCA);
 		l1.setBounds(40, 10, 40, 40);
 		l2.setBounds(40, 50, 40, 40);
 		l3.setBounds(40, 90, 40, 40);
