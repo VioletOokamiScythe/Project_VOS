@@ -29,22 +29,47 @@ public class LOGIN_SP extends JFrame{
     JLabel fJLabel1 = new JLabel("응시자");
     JLabel fJLabel2 = new JLabel("감독관");
 
-    JButton fJButton = new JButton("NEXT");
+    JButton fJButton1 = new JButton("NEXT");
+    JButton fJButton2 = new JButton("Create");
+
 
 
     // 두번째 화면 패널 작업
+    JPanel secondNorthPanel=new JPanel(new FlowLayout());
     JPanel secondCenterPanel = new JPanel(new FlowLayout());
     JPanel secondSouthPanel = new JPanel(new FlowLayout());
 
 
     // 두번째 화면 컴포넌트 작업
-    JLabel sJLabel1 = new JLabel("ID");
-    JLabel sJLabel2 = new JLabel("PW");
+    JLabel sJLabel1 = new JLabel("Student ID");
+    JLabel sJLabel2 = new JLabel("Professor ID");
+    JLabel sJLabel3 = new JLabel("PW");
 
     JButton sJButton1 = new JButton("PREV");
     JButton sJButton2 = new JButton("LOGIN");
 
     LOGIN_SP() {
+
+        //내부 리스너 생성
+        class Listener implements ActionListener{
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+
+                if (e.getSource() == fJButton1 && R1.isSelected() == true) {
+                    new Client_S_Login();
+                    setVisible(false);
+                }
+                if (e.getSource() == fJButton1 && R2.isSelected() == true) {
+                    new Client_P_Login();
+                    setVisible(false);
+                }
+            }
+
+        }
+
+        Listener l=new Listener();
 
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,8 +97,12 @@ public class LOGIN_SP extends JFrame{
         firstCenterPanel.add(R2);
         firstCenterPanel.add(fJLabel2);
 
-        firstSouthPanel.add(fJButton);
+        firstSouthPanel.add(fJButton1);
+        firstSouthPanel.add(fJButton2);
 
+
+        fJButton1.addActionListener(l);
+        fJButton2.addActionListener(l);
         
         //첫번째 패널의 컴포넌트 설정
         titleJLabel.setPreferredSize(new Dimension(168,56));
@@ -83,7 +112,8 @@ public class LOGIN_SP extends JFrame{
         fJLabel2.setPreferredSize(new Dimension(168, 36));
         blankJLabel.setPreferredSize(new Dimension(450,18));
         
-        fJButton.setPreferredSize(new Dimension(168, 36));
+        fJButton1.setPreferredSize(new Dimension(168, 36));
+        fJButton2.setPreferredSize(new Dimension(168, 36));
 
 
         //그룹설정
@@ -91,6 +121,8 @@ public class LOGIN_SP extends JFrame{
         G1.add(R2);
 
     }
+
+
 
     public static void main(String[] args) {
         LOGIN_SP L=new LOGIN_SP();
