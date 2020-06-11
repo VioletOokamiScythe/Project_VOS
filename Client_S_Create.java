@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 public class Client_S_Create extends JFrame {
+    
+    // 버튼 동작
+    S_Create_Action SCA = new S_Create_Action();
 
     // 중앙 패널 및 컴포넌트 생성
     JPanel CenterPanel = new JPanel(new FlowLayout());
@@ -57,7 +60,9 @@ public class Client_S_Create extends JFrame {
         t4.setPreferredSize(new Dimension(168, 36));
 
         b1.setPreferredSize(new Dimension(168, 28));
+        b1.addActionListener(SCA);
         b2.setPreferredSize(new Dimension(168, 28));
+        b2.addActionListener(SCA);
 
         //컴포넌트 추가
 
@@ -81,5 +86,11 @@ public class Client_S_Create extends JFrame {
 
     public static void main(String[] args) {
         Client_S_Create CSC = new Client_S_Create();
+    }
+    
+    class S_Create_Action implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == b2) dispose();
+        }
     }
 }
