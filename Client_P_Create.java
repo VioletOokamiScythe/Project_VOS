@@ -1,11 +1,7 @@
-import java.awt.Label;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
 
 public class Client_P_Create extends JFrame {
 
@@ -16,6 +12,7 @@ public class Client_P_Create extends JFrame {
 	TextField t4 = new TextField();
 	JButton j1 = new JButton("Create");
 	JButton j2 = new JButton("Cancel");
+	WARNING Warning = new WARNING();
 
 	/* CP GUI */
 	Client_P_Create() {
@@ -60,6 +57,12 @@ public class Client_P_Create extends JFrame {
 	class P_Create_Action implements ActionListener {
 		public void actionPerformed(ActionEvent T) {
 			if (T.getSource() == j2) dispose();
+			if (T.getSource() == j1) {
+				// 하나라도 미입력시 메시지 출력
+				if (t1.getText().length() == 0 || t2.getText().length() == 0 ||
+						t3.getText().length() == 0 || t4.getText().length() == 0)
+					Warning.input_warning();
+			}
 		}
 	}
 }
