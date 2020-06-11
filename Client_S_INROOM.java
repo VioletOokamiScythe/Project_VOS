@@ -20,10 +20,9 @@ public class Client_S_INROOM extends JFrame {
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("VOS - Create S");
-        setSize(new Dimension(1600, 900));
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setAlwaysOnTop(true);
-        //setUndecorated(true);
+        setUndecorated(true);
         setVisible(true);
         
         //컴포넌트 설정
