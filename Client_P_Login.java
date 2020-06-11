@@ -14,6 +14,7 @@ import javax.swing.border.EtchedBorder;
 public class Client_P_Login extends JFrame{
 
 	P_Login_Action PLA = new P_Login_Action();
+	WARNING Warning = new WARNING();
 	JLabel lbl,la1,la2,la3;
     JTextField id;
     JPasswordField passwd;
@@ -76,6 +77,10 @@ public class Client_P_Login extends JFrame{
 	class P_Login_Action implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 	        if(e.getSource() == b3) new Client_P_Create();
+		if(e.getSource() == b2) {
+			// 하나라도 미입력시 메시지 출력
+			if(id.getText().length() == 0 || passwd.getText().length() == 0) Warning.input_warning();
+            }
         }
     }
 	
