@@ -4,26 +4,27 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+public class Client_S_SAVE extends JFrame {
 
-public class Client_S_SAVE extends JFrame{
+     // 패널 생성
+     JPanel basePanel = new JPanel(new BorderLayout());
+     JPanel northPanel = new JPanel(new FlowLayout());
+     JPanel centerPanel = new JPanel(new FlowLayout());
+     JPanel southPanel = new JPanel(new FlowLayout());
 
-     //패널 생성
-     JPanel basePanel=new JPanel(new BorderLayout());
-     JPanel northPanel=new JPanel(new FlowLayout());
-     JPanel centerPanel=new JPanel(new FlowLayout());
-     JPanel southPanel=new JPanel(new FlowLayout());
+     // 컴포넌트 생성
+     JLabel titleLabel = new JLabel("VOS - Very Objective System");
+     JLabel ExamCode = new JLabel("EXAM CODE");
+     JTextField ExamCodeField = new JTextField();
+     JLabel SubjectName = new JLabel("SUBJECT NAME");
+     JTextField SubjectNameField = new JTextField();
+     JLabel ExamTime = new JLabel("EXAM TIME");
+     JComboBox ExamTimeHOUR = new JComboBox<String>();
+     JLabel ExamTimeHourLabel = new JLabel("시");
+     JComboBox ExamTimeMINUTE = new JComboBox<String>();
+     JLabel ExamTimeMINUTELabel = new JLabel("분 시작");
 
-     //컴포넌트 생성
-     JLabel titleLabel=new JLabel("VOS - Very Objective System");
-     JLabel ExamCode=new JLabel("EXAM CODE");
-     JTextField ExamCodeField=new JTextField();
-     JLabel SubjectName=new JLabel("SUBJECT NAME");
-     JTextField SubjectNameField=new JTextField();
-     JLabel ExamTime=new JLabel("EXAM TIME");
-     JComboBox ExamTimeHOUR=new JComboBox<String>();
-     JLabel ExamTimeHourLabel=new JLabel("시");
-     JComboBox ExamTimeMINUTE=new JComboBox<String>();
-     JLabel ExamTimeMINUTELabel=new JLabel("분 시작");
+     JButton SaveButton = new JButton("저장");
 
      Client_S_SAVE(){
           // 기본설정
@@ -32,6 +33,18 @@ public class Client_S_SAVE extends JFrame{
         setSize(450,280);
         setVisible(true);
         setContentPane(basePanel);
+
+        class Listener implements ActionListener{
+          @Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getSource()==SaveButton) {
+                    File calendar=new File("./calendar.txt");
+
+                    
+               }
+		}
+        }
 
         //컴포넌트 설정
         basePanel.add(northPanel,BorderLayout.NORTH);
@@ -49,6 +62,8 @@ public class Client_S_SAVE extends JFrame{
         centerPanel.add(ExamTimeMINUTE);
         centerPanel.add(ExamTimeMINUTELabel);
 
+        southPanel.add(SaveButton);
+
         titleLabel.setPreferredSize(new Dimension(168, 28));
         ExamCode.setPreferredSize(new Dimension(168, 28));
         ExamCodeField.setPreferredSize(new Dimension(168, 28));
@@ -59,8 +74,13 @@ public class Client_S_SAVE extends JFrame{
         ExamTimeHourLabel.setPreferredSize(new Dimension(28, 28));
         ExamTimeMINUTE.setPreferredSize(new Dimension(65, 28));
         ExamTimeMINUTELabel.setPreferredSize(new Dimension(56, 28));
+     
+        
+
+		
      }
+
      public static void main(String[] args) {
-          Client_S_SAVE CSS=new Client_S_SAVE();
+          Client_S_SAVE CSS = new Client_S_SAVE();
      }
 }
