@@ -18,7 +18,7 @@ public class Client_P_Login extends JFrame{
 	JLabel lbl,la1,la2,la3;
     JTextField id;
     JPasswordField passwd;
-    JPanel idPanel,paPanel,loginPanel;
+    JPanel idPanel,paPanel,loginPanel,cpPanel;
     JButton b1,b2,b3;
     JTextArea content;
 	public Client_P_Login() {
@@ -33,7 +33,7 @@ public class Client_P_Login extends JFrame{
 		lbl.setBorder(eborder);
 		
 		add( lbl );
-		
+		cpPanel = new JPanel();
 		idPanel = new JPanel();
         paPanel = new JPanel();
       
@@ -57,6 +57,7 @@ public class Client_P_Login extends JFrame{
 	b3.addActionListener(PLA);
         loginPanel.add( b2 );
         loginPanel.add( b3 );
+	add(cpPanel);
         add(idPanel);
         add(paPanel);
         add(loginPanel);
