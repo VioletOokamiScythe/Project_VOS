@@ -30,7 +30,7 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "stuent", "1111");
+			Connection con = DriverManager.getConnection(URL, "student", "1111");
 			Statement stmt = con.createStatement();
 			System.out.println("Successful connection to SQL Server.");
 			stmt.executeUpdate(UserList);
