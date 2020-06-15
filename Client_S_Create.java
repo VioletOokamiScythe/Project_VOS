@@ -118,6 +118,7 @@ public class Client_S_Create extends JFrame {
                         new Dial(1);
                     } catch (Exception e0) {
                         //TODO: handle exception
+                        
                     }
                 }
                 else new Dial(0);
