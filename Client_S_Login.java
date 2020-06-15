@@ -1,3 +1,5 @@
+import java.io.*;
+import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -40,6 +42,9 @@ public class Client_S_Login extends JFrame {
         SouthPanel.add(b1);
         SouthPanel.add(b2);
 
+        b1.addActionListener(SLA);
+        b2.addActionListener(SLA);
+
          // 컴포넌트 설정
 
          CenterPanel.setPreferredSize(new Dimension(BasePanel.getWidth(), BasePanel.getHeight() - 56));
@@ -55,7 +60,42 @@ public class Client_S_Login extends JFrame {
          b2.setPreferredSize(new Dimension(168, 28));
     }
 
-    public static void main(String[] args) {
-        Client_S_Login CSL = new Client_S_Login();
+    class S_Login_Action implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            String SID;
+            String PW;
+            String role;
+            String finalString;
+            // TODO Auto-generated method stub
+            if (e.getSource()==b1) {
+                SID = t1.getText();
+                PW = t2.getText();
+
+                if (!(SID.equals("")) && !(PW.equals(""))) {
+                    Socket s=null;
+                    OutputStream outStream;
+                    DataOutputStream dataOutputStream;
+                    try {
+                        s= new Socket("211.250.161.63",5656);
+                        outStream = s.getOutputStream();
+                        dataOutputStream=new DataOutputStream(outStream);
+                        role ="0";
+                        finalString = role + "/" + SID + "/" + PW;
+                        dataOutputStream.writeUTF(finalString);
+                        new Dial(1);
+                    } catch (Exception e0) {
+                        //TODO: handle exception
+                        
+                    }
+                }
+                else new Dial(0);
+            }
+            if (e.getSource()==b2) dispose();
+        }
+        
     }
+    S_Login_Action SLA=new S_Login_Action();
 }

@@ -1,9 +1,7 @@
+import java.io.*;
+import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.DataOutputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -118,7 +116,7 @@ public class Client_S_Create extends JFrame {
                         new Dial(1);
                     } catch (Exception e0) {
                         //TODO: handle exception
-                        
+
                     }
                 }
                 else new Dial(0);
