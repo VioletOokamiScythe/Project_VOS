@@ -1,10 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.DataOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
 public class Client_S_Create extends JFrame {
-    
+
     // 버튼 동작
     S_Create_Action SCA = new S_Create_Action();
 
@@ -22,7 +26,7 @@ public class Client_S_Create extends JFrame {
     JTextField t4 = new JTextField();
 
     // 루트 패널 생성
-    JPanel BasePanel = new JPanel(new BorderLayout(9,9));
+    JPanel BasePanel = new JPanel(new BorderLayout(9, 9));
 
     // 아래쪽 패널 및 컴포넌트 생성
     JPanel SouthPanel = new JPanel();
@@ -39,10 +43,9 @@ public class Client_S_Create extends JFrame {
         setVisible(true);
 
         setContentPane(BasePanel);
-       
 
-        BasePanel.add(CenterPanel,BorderLayout.CENTER);
-        BasePanel.add(SouthPanel,BorderLayout.SOUTH);
+        BasePanel.add(CenterPanel, BorderLayout.CENTER);
+        BasePanel.add(SouthPanel, BorderLayout.SOUTH);
 
         // 컴포넌트 설정
 
@@ -64,8 +67,7 @@ public class Client_S_Create extends JFrame {
         b2.setPreferredSize(new Dimension(168, 28));
         b2.addActionListener(SCA);
 
-        //컴포넌트 추가
-
+        // 컴포넌트 추가
 
         CenterPanel.add(l1);
         CenterPanel.add(t1);
@@ -87,10 +89,41 @@ public class Client_S_Create extends JFrame {
     public static void main(String[] args) {
         Client_S_Create CSC = new Client_S_Create();
     }
-    
+
     class S_Create_Action implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == b2) dispose();
+
+            String SID;
+            String PW;
+            String Name;
+            String Major;
+            String role;
+            String finalString;
+            if (e.getSource() == b1) {
+                SID = t1.getText();
+                PW = t2.getText();
+                Name = t3.getText();
+                Major = t4.getText();
+                if (!(SID.equals("")) && !(PW.equals("")) && !Name.equals("") && !Major.equals("")) {
+                    Socket s=null;
+                    OutputStream outStream;
+                    DataOutputStream dataOutputStream;
+                    try {
+                        s= new Socket("211.250.161.63",5656);
+                        outStream = s.getOutputStream();
+                        dataOutputStream=new DataOutputStream(outStream);
+                        role ="1";
+                        finalString = role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
+                        dataOutputStream.writeUTF(finalString);
+                        new Dial(1);
+                    } catch (Exception e0) {
+                        //TODO: handle exception
+                    }
+                }
+                else new Dial(0);
+            }
+            if (e.getSource() == b2)
+                dispose();
         }
     }
 }
