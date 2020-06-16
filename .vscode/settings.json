@@ -6,9 +6,7 @@
         "**/.factorypath": true
     },
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "Referenced Libraries/sqljdbc_8.2.2.0_kor/sqljdbc_8.2/kor/mssql-jdbc-8.2.2.jre8.jar",
-        "Referenced Libraries/sqljdbc_8.2.2.0_kor/sqljdbc_8.2/kor/mssql-jdbc-8.2.2.jre11.jar",
-        "Referenced Libraries/sqljdbc_8.2.2.0_kor/sqljdbc_8.2/kor/mssql-jdbc-8.2.2.jre13.jar"
+        "Referenced Libraries/mssql-jdbc-8.2.2.jre13.jar",
+        "Referenced Libraries/opencv-430.jar"
     ]
 }
