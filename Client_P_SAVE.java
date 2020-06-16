@@ -1,16 +1,28 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.text.Format;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
+
 //save 1
-public class Client_P_SAVE extends JFrame{
-	Client_P_SAVE() {
+public class Client_P_Save extends JFrame{
+	
+
+	Client_P_Save() {
 		JPanel P = new JPanel();
 		Label l1 = new Label("Professor ID");
 		Label l3 = new Label("NAME");
 		Label l4 = new Label("Major");
 		Label l5 = new Label("시험코드");
+
+
+
+		Label R_HEX=new Label("R");
+		add(R_HEX);
+
+
 
 		add(l1);
 		add(l3);
@@ -20,14 +32,36 @@ public class Client_P_SAVE extends JFrame{
 		TextField t3 = new TextField();
 		TextField t4 = new TextField();
 		TextField t5 = new TextField();
+		
+
+
+		JTextField RValue=new JTextField();
+		add(RValue);
+		RValue.setHorizontalAlignment(JTextField.CENTER);
+
+
 
 		t1.setEnabled(false);
 		t3.setEnabled(false);
 		t4.setEnabled(false);
+		t5.setEnabled(false);
+
+
+		
 		add(t1);
 		add(t3);
 		add(t4);
 		add(t5);
+
+
+
+		JSlider R=new JSlider(0,255);
+		JSlider G=new JSlider(0,255);
+		JSlider B=new JSlider(0,255);
+		add(R);
+
+
+
 
 		JButton j1 = new JButton("Check");
 		JButton j2 = new JButton("Next");
@@ -43,18 +77,74 @@ public class Client_P_SAVE extends JFrame{
 		t3.setBounds(140, 50, 200, 30);
 		t4.setBounds(140, 90, 200, 30);
 		t5.setBounds(140, 130, 200, 30);
+
+
+
+
+		R_HEX.setBounds(40, 168, 28, 28);
+		RValue.setBounds(56, 168, 56, 28);
+		R.setBounds(112, 168, 256, 28);
+
+
+
+			class P_Save_Action implements ActionListener, ChangeListener{
+	
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					// TODO Auto-generated method stub
+					RValue.setText(String.valueOf(R.getValue()));
+					t5.setText(String.valueOf(R.getValue())+String.valueOf(G.getValue())+String.valueOf(B.getValue()));
+					
+				}
+		
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					if (e.getSource()==j1) {
+						
+					}
+					if (e.getSource()==j2) {
+						new Client_P_Save2();
+					}
+					
+					if (e.getSource()==j3){
+						dispose();
+					}
+				}
+		
+			}
+			P_Save_Action PSA=new P_Save_Action();
+		
+
+
+
+		R.addChangeListener(PSA);
+
+
+
 		j1.setBounds(50, 300, 80, 30);
 		j2.setBounds(150, 300, 80, 30);
 		j3.setBounds(250, 300, 80, 30);
+
+		
+		j1.addActionListener(PSA);
+		j2.addActionListener(PSA);
+		j3.addActionListener(PSA);
+
+
 		add(P);
 		setSize(400, 400);
 		setTitle("VOS -Save P");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-	}
 
+		
+		
+	}
+	
+	
 	public static void main(String[] args) {
-		Client_P_SAVE CP_SAVE = new Client_P_SAVE();
+		Client_P_Save CP_SAVE = new Client_P_Save();
 
 	}
 

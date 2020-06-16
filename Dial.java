@@ -13,6 +13,7 @@ public class Dial extends JFrame {
                     JOptionPane.showMessageDialog(null, "정상 처리되었습니다.");
                     break;
                case 2:
+                    JOptionPane.showMessageDialog(null, "정말로 이 시험을 삭제합니까?\n실행하면 다시 되돌릴 수 없습니다.", "경고", JOptionPane.WARNING_MESSAGE);
                     break;
                case 3:
                     break;

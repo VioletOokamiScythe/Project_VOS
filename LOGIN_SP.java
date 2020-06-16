@@ -59,11 +59,11 @@ public class LOGIN_SP extends JFrame{
 
                 if (e.getSource() == fJButton1 && R1.isSelected() == true) {
                     new Client_S_Login();
-                    setVisible(false);
+                    dispose();
                 }
                 if (e.getSource() == fJButton1 && R2.isSelected() == true) {
                     new Client_P_Login();
-                    setVisible(false);
+                    dispose();
                 }
             }
 

@@ -1,10 +1,11 @@
 import java.io.*;
+import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
-public class Client_S_SAVE extends JFrame {
+public class Client_S_Save extends JFrame {
 
      // 패널 생성
      JPanel basePanel = new JPanel(new BorderLayout());
@@ -26,10 +27,10 @@ public class Client_S_SAVE extends JFrame {
 
      JButton SaveButton = new JButton("저장");
 
-     Client_S_SAVE(){
+     Client_S_Save(){
           // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("VOS - Client_S_SAVE");
+        setTitle("VOS - Client_S_Save");
         setSize(450,280);
         setVisible(true);
         setContentPane(basePanel);
@@ -40,7 +41,14 @@ public class Client_S_SAVE extends JFrame {
 			// TODO Auto-generated method stub
 			if (e.getSource()==SaveButton) {
                     File calendar=new File("./calendar.txt");
-
+                    String Exam_Data;
+                    StringTokenizer Stoken;
+                    try {
+                         BufferedWriter bw = new BufferedWriter(new FileWriter(calendar,true));
+                         BufferedReader br=new BufferedReader(new FileReader(calendar));
+                    } catch (Exception e0) {
+                         //TODO: handle exception
+                    }
                     
                }
 		}
@@ -81,6 +89,6 @@ public class Client_S_SAVE extends JFrame {
      }
 
      public static void main(String[] args) {
-          Client_S_SAVE CSS = new Client_S_SAVE();
+          Client_S_Save CSS = new Client_S_Save();
      }
 }

@@ -14,12 +14,10 @@ public class Client_S_Main extends JFrame {
     // 컴포넌트 작업
 
     JLabel Title = new JLabel("VOS - Very Objective System");
-    JLabel Mode = new JLabel("Mode");
-    JLabel modeLabel = new JLabel();
+    JLabel Mode = new JLabel("Mode = Student");
     JLabel Name = new JLabel("NAME");
     JLabel nameLabel = new JLabel();
     JLabel SID = new JLabel("Student ID");
-    JLabel PID = new JLabel("Professor ID");
     JLabel IDLabel = new JLabel();
     JLabel Major = new JLabel("MAJOR");
     JLabel majorLabel = new JLabel();
@@ -30,7 +28,7 @@ public class Client_S_Main extends JFrame {
 
     JButton StartRemoteControl = new JButton("원격 접속 실행");
     JButton SaveButton = new JButton("로컬에 시험 정보 저장");
-    JButton modifyButton = new JButton("저장된 시험 정보 수정");
+    JButton ModifyButton = new JButton("저장된 시험 정보 수정");
 
     Client_S_Main() {
         // 기본설정
@@ -49,7 +47,6 @@ public class Client_S_Main extends JFrame {
 
         westPanel.add(Title);
         westPanel.add(Mode);
-        westPanel.add(modeLabel);
         westPanel.add(Name);
         westPanel.add(nameLabel);
         westPanel.add(SID);
@@ -63,12 +60,38 @@ public class Client_S_Main extends JFrame {
 
         southPanel.add(StartRemoteControl);
         southPanel.add(SaveButton);
-        southPanel.add(modifyButton);
+        southPanel.add(ModifyButton);
+
+
+        StartRemoteControl.addActionListener(SMA);
+        SaveButton.addActionListener(SMA);
+        ModifyButton.addActionListener(SMA);
 
     }
+
+    class S_Main_Action implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+            if (e.getSource()==StartRemoteControl) {
+                
+            }
+            if (e.getSource()==SaveButton) {
+                new Client_S_Save();
+            }
+            if (e.getSource()==ModifyButton) {
+                
+            }
+        }
+        
+    }
+
+    S_Main_Action SMA=new S_Main_Action();
 
     public static void main(String[] args) {
         Client_S_Main CSM = new Client_S_Main();
 
     }
+
 }
