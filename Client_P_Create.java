@@ -1,3 +1,5 @@
+import java.io.*;
+import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,7 +14,6 @@ public class Client_P_Create extends JFrame {
 	TextField t4 = new TextField();
 	JButton j1 = new JButton("Create");
 	JButton j2 = new JButton("Cancel");
-	WARNING Warning = new WARNING();
 
 	/* CP GUI */
 	Client_P_Create() {
@@ -55,13 +56,39 @@ public class Client_P_Create extends JFrame {
 	}
 
 	class P_Create_Action implements ActionListener {
+		String PID;
+		String PPW;
+		String PName;
+		String PMaj;
+		String role;
+		String finalString;
+		
 		public void actionPerformed(ActionEvent T) {
 			if (T.getSource() == j2) dispose();
 			if (T.getSource() == j1) {
-				// 하나라도 미입력시 메시지 출력
-				if (t1.getText().length() == 0 || t2.getText().length() == 0 ||
-						t3.getText().length() == 0 || t4.getText().length() == 0)
-					Warning.input_warning();
+				PID = t1.getText();
+				PPW = t2.getText();
+				PName = t3.getText();
+				PMaj = t4.getText();
+				
+				if (!(PID.equals("")) && !(PPW.equals("")) && 
+						!(PName.equals("")) && !(PMaj.equals(""))) {
+					Socket s = null;
+					OutputStream outStream;
+					DataOutputStream dataOutputStream;
+					try {
+						s = new Socket("211.250.161.63", 5656);
+						outStream = s.getOutputStream();
+						dataOutputStream = new DataOutputStream(outStream);
+						role = "1";
+						finalString = role + "/" + PID + "/" + PPW + "/" + PName + "/" + PMaj;
+						dataOutputStream.writeUTF(finalString);
+						new Dial(1);
+					} catch (Exception e) {
+						
+					}
+				}
+				else new Dial(0);
 			}
 		}
 	}
