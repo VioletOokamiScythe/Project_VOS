@@ -27,65 +27,62 @@ public class Client_S_Save extends JFrame {
 
      JButton SaveButton = new JButton("저장");
 
-     Client_S_Save(){
+     Client_S_Save() {
           // 기본설정
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("VOS - Client_S_Save");
-        setSize(450,280);
-        setVisible(true);
-        setContentPane(basePanel);
+          setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+          setTitle("VOS - Client_S_Save");
+          setSize(450, 280);
+          setVisible(true);
+          setContentPane(basePanel);
 
-        class Listener implements ActionListener{
-          @Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			if (e.getSource()==SaveButton) {
-                    File calendar=new File("./calendar.txt");
-                    String Exam_Data;
-                    StringTokenizer Stoken;
-                    try {
-                         BufferedWriter bw = new BufferedWriter(new FileWriter(calendar,true));
-                         BufferedReader br=new BufferedReader(new FileReader(calendar));
-                    } catch (Exception e0) {
-                         //TODO: handle exception
+          class Listener implements ActionListener {
+               @Override
+               public void actionPerformed(ActionEvent e) {
+                    // TODO Auto-generated method stub
+                    if (e.getSource() == SaveButton) {
+                         File calendar = new File("./calendar.txt");
+                         String Exam_Data;
+                         StringTokenizer Stoken;
+                         try {
+                              BufferedWriter bw = new BufferedWriter(new FileWriter(calendar, true));
+                              BufferedReader br = new BufferedReader(new FileReader(calendar));
+                         } catch (Exception e0) {
+                              // TODO: handle exception
+                         }
+
                     }
-                    
                }
-		}
-        }
+          }
 
-        //컴포넌트 설정
-        basePanel.add(northPanel,BorderLayout.NORTH);
-        basePanel.add(centerPanel,BorderLayout.CENTER);
-        basePanel.add(southPanel,BorderLayout.SOUTH);
+          // 컴포넌트 설정
+          basePanel.add(northPanel, BorderLayout.NORTH);
+          basePanel.add(centerPanel, BorderLayout.CENTER);
+          basePanel.add(southPanel, BorderLayout.SOUTH);
 
-        northPanel.add(titleLabel);
-        centerPanel.add(ExamCode);
-        centerPanel.add(ExamCodeField);
-        centerPanel.add(SubjectName);
-        centerPanel.add(SubjectNameField);
-        centerPanel.add(ExamTime);
-        centerPanel.add(ExamTimeHOUR);
-        centerPanel.add(ExamTimeHourLabel);
-        centerPanel.add(ExamTimeMINUTE);
-        centerPanel.add(ExamTimeMINUTELabel);
+          northPanel.add(titleLabel);
+          centerPanel.add(ExamCode);
+          centerPanel.add(ExamCodeField);
+          centerPanel.add(SubjectName);
+          centerPanel.add(SubjectNameField);
+          centerPanel.add(ExamTime);
+          centerPanel.add(ExamTimeHOUR);
+          centerPanel.add(ExamTimeHourLabel);
+          centerPanel.add(ExamTimeMINUTE);
+          centerPanel.add(ExamTimeMINUTELabel);
 
-        southPanel.add(SaveButton);
+          southPanel.add(SaveButton);
 
-        titleLabel.setPreferredSize(new Dimension(168, 28));
-        ExamCode.setPreferredSize(new Dimension(168, 28));
-        ExamCodeField.setPreferredSize(new Dimension(168, 28));
-        SubjectName.setPreferredSize(new Dimension(168, 28));
-        SubjectNameField.setPreferredSize(new Dimension(168, 28));
-        ExamTime.setPreferredSize(new Dimension(112, 28));
-        ExamTimeHOUR.setPreferredSize(new Dimension(65, 28));
-        ExamTimeHourLabel.setPreferredSize(new Dimension(28, 28));
-        ExamTimeMINUTE.setPreferredSize(new Dimension(65, 28));
-        ExamTimeMINUTELabel.setPreferredSize(new Dimension(56, 28));
-     
-        
+          titleLabel.setPreferredSize(new Dimension(168, 28));
+          ExamCode.setPreferredSize(new Dimension(168, 28));
+          ExamCodeField.setPreferredSize(new Dimension(168, 28));
+          SubjectName.setPreferredSize(new Dimension(168, 28));
+          SubjectNameField.setPreferredSize(new Dimension(168, 28));
+          ExamTime.setPreferredSize(new Dimension(112, 28));
+          ExamTimeHOUR.setPreferredSize(new Dimension(65, 28));
+          ExamTimeHourLabel.setPreferredSize(new Dimension(28, 28));
+          ExamTimeMINUTE.setPreferredSize(new Dimension(65, 28));
+          ExamTimeMINUTELabel.setPreferredSize(new Dimension(56, 28));
 
-		
      }
 
      public static void main(String[] args) {
