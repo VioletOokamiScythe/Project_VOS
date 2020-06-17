@@ -9,7 +9,7 @@ public class Client_P_Create extends JFrame {
 
 	P_Create_Action PCA = new P_Create_Action();
 	TextField t1 = new TextField();
-	TextField t2 = new TextField();
+	JPasswordField t2 = new JPasswordField();
 	TextField t3 = new TextField();
 	TextField t4 = new TextField();
 	JButton j1 = new JButton("Create");
@@ -33,7 +33,6 @@ public class Client_P_Create extends JFrame {
 		add(t3);
 		add(t4);
 
-		t3.setEchoChar('*');
 		add(j1);
 		j1.addActionListener(PCA);
 		add(j2);
