@@ -25,7 +25,7 @@ public class Client_S_Main extends JFrame {
     JLabel IDLabel = new JLabel();
     JLabel Major = new JLabel("MAJOR = ");
     JLabel majorLabel = new JLabel();
-    JLabel TestTime = new JLabel("NEXT EXAM Time = ");
+    JLabel TestTime = new JLabel("NEXT EXAM TIME = ");
     JLabel TestTimeLabel = new JLabel();
     JLabel ExamCode = new JLabel("NEXT EXAM CODE = ");
     JLabel ExamCodeLabel = new JLabel();
@@ -54,36 +54,42 @@ public class Client_S_Main extends JFrame {
         
         ModeLabel.setPreferredSize(new Dimension(112,28));
         ModeLabel.setFont(new Font("Serif",Font.PLAIN,18));
+        ModeLabel.setText("text");
         
         Name.setPreferredSize(new Dimension(112,28));
         Name.setFont(new Font("Serif",Font.PLAIN,18));
         
         nameLabel.setPreferredSize(new Dimension(112,28));
         nameLabel.setFont(new Font("Serif",Font.PLAIN,18));
+        nameLabel.setText("text");
         
         SID.setPreferredSize(new Dimension(112,28));
         SID.setFont(new Font("Serif",Font.PLAIN,18));
         
         IDLabel.setPreferredSize(new Dimension(112,28));
         IDLabel.setFont(new Font("Serif",Font.PLAIN,18));
+        IDLabel.setText("text");
         
         Major.setPreferredSize(new Dimension(112,28));
         Major.setFont(new Font("Serif",Font.PLAIN,18));
         
         majorLabel.setPreferredSize(new Dimension(112,28));
         majorLabel.setFont(new Font("Serif",Font.PLAIN,18));
+        majorLabel.setText("text");
         
         TestTime.setPreferredSize(new Dimension(168,28));
         TestTime.setFont(new Font("Serif",Font.PLAIN,14));
         
         TestTimeLabel.setPreferredSize(new Dimension(112,28));
         TestTimeLabel.setFont(new Font("Serif",Font.PLAIN,14));
+        TestTimeLabel.setText("text");
         
         ExamCode.setPreferredSize(new Dimension(168,28));
         ExamCode.setFont(new Font("Serif",Font.PLAIN,14));
         
         ExamCodeLabel.setPreferredSize(new Dimension(112,28));
         ExamCodeLabel.setFont(new Font("Serif",Font.PLAIN,14));
+        ExamCodeLabel.setText("text");
         
 
         basePanel.add(westPanel,BorderLayout.WEST);
