@@ -16,6 +16,7 @@ public class Dial extends JFrame {
                     JOptionPane.showMessageDialog(null, "정말로 이 시험을 삭제합니까?\n실행하면 다시 되돌릴 수 없습니다.", "경고", JOptionPane.WARNING_MESSAGE);
                     break;
                case 3:
+            	    JOptionPane.showMessageDialog(null, "회원정보가 맞지 않습니다", "오류", JOptionPane.ERROR_MESSAGE);
                     break;
                case 4:
                     break;

@@ -1,20 +1,14 @@
-import java.awt.FlowLayout;
+import java.io.*;
+import java.net.*;
+import java.awt.*;
 import java.awt.event.*;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.border.EtchedBorder;
 
 public class Client_P_Login extends JFrame{
 
 	P_Login_Action PLA = new P_Login_Action();
-	WARNING Warning = new WARNING();
 	JLabel lbl,la1,la2,la3;
     JTextField id;
     JPasswordField passwd;
@@ -63,7 +57,7 @@ public class Client_P_Login extends JFrame{
         add(loginPanel);
         
         
-        setSize( 250, 400 );
+        setSize( 300, 400 );
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -76,11 +70,34 @@ public class Client_P_Login extends JFrame{
 	}
 
 	class P_Login_Action implements ActionListener {
+		String PID;
+		String PPW;
+		String role;
+		String finalString;
+
         public void actionPerformed(ActionEvent e) {
 	        if(e.getSource() == b3) new Client_P_Create();
 		if(e.getSource() == b2) {
-			// 하나라도 미입력시 메시지 출력
-			if(id.getText().length() == 0 || passwd.getText().length() == 0) Warning.input_warning();
+			PID = id.getText();
+			PPW = passwd.getText();
+			
+			if(!(PID.equals("")) && !(PPW.equals(""))) {
+				Socket s = null;
+				OutputStream outStream;
+				DataOutputStream dataOutputStream;
+				try {
+					s = new Socket("211.250.161.63", 5656);
+					outStream = s.getOutputStream();
+					dataOutputStream = new DataOutputStream(outStream);
+					role = "0";
+					finalString = role + "/" + PID + "/" + PPW;
+					dataOutputStream.writeUTF(finalString);
+					new Dial(1);
+				} catch (Exception e0) {
+					
+				}
+			}
+			else new Dial(0);
             }
         }
     }
