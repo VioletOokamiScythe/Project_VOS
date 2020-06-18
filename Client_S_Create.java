@@ -97,11 +97,15 @@ public class Client_S_Create extends JFrame {
             String Major;
             String role;
             String finalString;
+            String Identity;
+            
             if (e.getSource() == b1) {
                 SID = t1.getText();
                 PW = t2.getText();
                 Name = t3.getText();
                 Major = t4.getText();
+                Identity = "Student";
+                
                 if (!(SID.equals("")) && !(PW.equals("")) && !Name.equals("") && !Major.equals("")) {
                     Socket s=null;
                     OutputStream outStream;
@@ -111,7 +115,7 @@ public class Client_S_Create extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream=new DataOutputStream(outStream);
                         role ="1";
-                        finalString = role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
+                        finalString = Identity + role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
                         dataOutputStream.writeUTF(finalString);
                         new Dial(1);
                     } catch (Exception e0) {
