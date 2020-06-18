@@ -115,7 +115,7 @@ public class Client_S_Create extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream=new DataOutputStream(outStream);
                         role ="1";
-                        finalString = Identity + role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
+                        finalString = Identity + "/" + role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
                         dataOutputStream.writeUTF(finalString);
                         new Dial(1);
                     } catch (Exception e0) {
