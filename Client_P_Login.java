@@ -74,12 +74,14 @@ public class Client_P_Login extends JFrame{
 		String PPW;
 		String role;
 		String finalString;
+		String Identity;
 
         public void actionPerformed(ActionEvent e) {
 	        if(e.getSource() == b3) new Client_P_Create();
 		if(e.getSource() == b2) {
 			PID = id.getText();
 			PPW = passwd.getText();
+			Identity = "Professor";
 			
 			if(!(PID.equals("")) && !(PPW.equals(""))) {
 				Socket s = null;
@@ -90,7 +92,7 @@ public class Client_P_Login extends JFrame{
 					outStream = s.getOutputStream();
 					dataOutputStream = new DataOutputStream(outStream);
 					role = "0";
-					finalString = role + "/" + PID + "/" + PPW;
+					finalString = Identity + "/" + role + "/" + PID + "/" + PPW;
 					dataOutputStream.writeUTF(finalString);
 					new Dial(1);
 				} catch (Exception e0) {
