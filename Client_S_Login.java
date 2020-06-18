@@ -69,10 +69,13 @@ public class Client_S_Login extends JFrame {
             String PW;
             String role;
             String finalString;
+            String Identity;
+            
             // TODO Auto-generated method stub
             if (e.getSource()==b1) {
                 SID = t1.getText();
                 PW = t2.getText();
+                Identity = "Student";
 
                 if (!(SID.equals("")) && !(PW.equals(""))) {
                     Socket s=null;
@@ -83,7 +86,7 @@ public class Client_S_Login extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream=new DataOutputStream(outStream);
                         role ="0";
-                        finalString = role + "/" + SID + "/" + PW;
+                        finalString = Identity + "/" + role + "/" + SID + "/" + PW;
                         dataOutputStream.writeUTF(finalString);
                         new Dial(1);
                     } catch (Exception e0) {
