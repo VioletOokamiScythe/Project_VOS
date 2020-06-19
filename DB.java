@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.sql.*;
+import java.text.*;
 
 public class DB {
 	static String SQLEXECUTER;
@@ -13,8 +14,8 @@ public class DB {
 		if (role.contentEquals("0"))
 			SQLEXECUTER = "select from Client_S_INFO_TABLE WHERE id='" + id;
 		else if (role.contentEquals("1"))
-			SQLEXECUTER = "insert into Client_S_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','"
-					+ Major + "')";
+			SQLEXECUTER = "insert into Client_S_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
+					+ "')";
 		else if (role.contentEquals("2"))
 			SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE ID='" + id + "'";
 
@@ -71,7 +72,19 @@ public class DB {
 		return rs1;
 	}
 
-	public static void CreateEXAM(String ExamCode, String ExamTime, String ExamRoom) {
+	public static void Check_EC_Duplicate(String ExamCode) {
+
+	}
+
+	public static void Check_ET_Duplicate(String ExamTime) {
+
+	}
+
+	public static void Check_ER_Duplicate(String ExamRoom) {
+
+	}
+
+	public static void CreateEXAM(String ExamCode, String ExamTime, String ExamRoom, String Host_IP) {
 		SQLEXECUTER = "CREATE TABLE [" + ExamCode + "](EXAMCODE char(6) NOT NULL)";
 
 		try {
@@ -93,23 +106,27 @@ public class DB {
 
 			// TODO: handle exception
 		}
-		/*
-		 * SQLEXECUTER = "Insert into ";
-		 * 
-		 * try { Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		 * 
-		 * } catch (ClassNotFoundException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } try { Connection con =
-		 * DriverManager.getConnection(URL, "professor", "1111"); Statement stmt =
-		 * con.createStatement();
-		 * System.out.println("Successful connection to SQL Server.");
-		 * stmt.executeUpdate(SQLEXECUTER);
-		 * System.out.println("Query operation was successful."); } catch (Exception e)
-		 * { e.printStackTrace();
-		 * System.out.println("Failed connection to SQL Server.");
-		 * 
-		 * // TODO: handle exception }
-		 */
+
+		SQLEXECUTER = "Insert into ";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception }
+		}
 	}
 
 	public static void Drop(String ExamCode, String ExamTime, String ExamRoom) {

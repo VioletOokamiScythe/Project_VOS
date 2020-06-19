@@ -1,9 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.text.Format;
-
 import javax.swing.*;
 import javax.swing.event.*;
+
+import java.text.*;
 
 
 //save 1
@@ -21,6 +21,10 @@ public class Client_P_Save extends JFrame{
 
 		Label R_HEX=new Label("R");
 		add(R_HEX);
+		Label G_HEX=new Label("G");
+		add(G_HEX);
+		Label B_HEX=new Label("B");
+		add(B_HEX);
 
 
 
@@ -36,8 +40,14 @@ public class Client_P_Save extends JFrame{
 
 
 		JTextField RValue=new JTextField();
+		JTextField GValue=new JTextField();
+		JTextField BValue=new JTextField();
 		add(RValue);
 		RValue.setHorizontalAlignment(JTextField.CENTER);
+		add(GValue);
+		GValue.setHorizontalAlignment(JTextField.CENTER);
+		add(BValue);
+		BValue.setHorizontalAlignment(JTextField.CENTER);
 
 
 
@@ -59,6 +69,8 @@ public class Client_P_Save extends JFrame{
 		JSlider G=new JSlider(0,255);
 		JSlider B=new JSlider(0,255);
 		add(R);
+		add(G);
+		add(B);
 
 
 
@@ -84,6 +96,14 @@ public class Client_P_Save extends JFrame{
 		R_HEX.setBounds(40, 168, 28, 28);
 		RValue.setBounds(56, 168, 56, 28);
 		R.setBounds(112, 168, 256, 28);
+		G_HEX.setBounds(40, 196, 28, 28);
+		GValue.setBounds(56, 196, 56, 28);
+		G.setBounds(112, 196, 256, 28);
+		B_HEX.setBounds(40, 224, 28, 28);
+		BValue.setBounds(56, 224, 56, 28);
+		B.setBounds(112, 224, 256, 28);
+
+
 
 
 
@@ -92,8 +112,21 @@ public class Client_P_Save extends JFrame{
 				@Override
 				public void stateChanged(ChangeEvent e) {
 					// TODO Auto-generated method stub
-					RValue.setText(String.valueOf(R.getValue()));
-					t5.setText(String.valueOf(R.getValue())+String.valueOf(G.getValue())+String.valueOf(B.getValue()));
+					if (e.getSource()==R){
+						RValue.setText(String.format("%02X", R.getValue()));
+						t5.setText(RValue.getText()+GValue.getText()+BValue.getText());
+					}
+					if (e.getSource()==G) {
+						GValue.setText(String.format("%02X", G.getValue()));
+						t5.setText(RValue.getText()+GValue.getText()+BValue.getText());
+					}
+					if (e.getSource()==B) {
+						BValue.setText(String.format("%02X", B.getValue()));
+						t5.setText(RValue.getText()+GValue.getText()+BValue.getText());
+					}
+					
+					
+					
 					
 				}
 		
@@ -119,6 +152,8 @@ public class Client_P_Save extends JFrame{
 
 
 		R.addChangeListener(PSA);
+		G.addChangeListener(PSA);
+		B.addChangeListener(PSA);
 
 
 

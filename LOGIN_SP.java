@@ -65,6 +65,15 @@ public class LOGIN_SP extends JFrame{
                     new Client_P_Login();
                     dispose();
                 }
+
+                if (e.getSource()==fJButton2&&R1.isSelected()==true){
+                    new Client_S_Create();
+                    dispose();
+                }
+                if (e.getSource()==fJButton2&&R2.isSelected()==true){
+                    new Client_P_Create();
+                    dispose();
+                }
             }
 
         }

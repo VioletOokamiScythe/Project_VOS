@@ -10,23 +10,35 @@ public class Dial extends JFrame {
                     JOptionPane.showMessageDialog(null, "비어있는 필드가 있습니다", "오류", JOptionPane.ERROR_MESSAGE);
                     break;
                case 1:
-                    JOptionPane.showMessageDialog(null, "정상 처리되었습니다.");
+                    JOptionPane.showMessageDialog(null, "정상 처리되었습니다.", "안내", JOptionPane.INFORMATION_MESSAGE);
                     break;
                case 2:
-                    JOptionPane.showMessageDialog(null, "정말로 이 시험을 삭제합니까?\n실행하면 다시 되돌릴 수 없습니다.", "경고", JOptionPane.WARNING_MESSAGE);
+                    int c = JOptionPane.showConfirmDialog(null, "정말로 이 시험을 삭제합니까?\n실행하면 다시 되돌릴 수 없습니다.", "경고",
+                              JOptionPane.YES_NO_OPTION);
+                    if (c == 0)
+                         JOptionPane.showInputDialog(null, "자동 삭제 방지를 위해 시험 코드를 입력하세요.", "안내",
+                                   JOptionPane.QUESTION_MESSAGE);
                     break;
                case 3:
-            	    JOptionPane.showMessageDialog(null, "회원정보가 맞지 않습니다", "오류", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "회원정보가 맞지 않습니다", "오류", JOptionPane.ERROR_MESSAGE);
                     break;
                case 4:
+                    JOptionPane.showMessageDialog(null, "현재 호스트입니다\n서버가 시작되었습니다\n응시자 접속을 백그라운드에서 기다립니다.", "안내",
+                              JOptionPane.INFORMATION_MESSAGE);
                     break;
                case 5:
+                    JOptionPane.showInputDialog(null, "시험 코드를 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
                     break;
-               case 6:
+               case 6: // 임시
+                    JOptionPane.showInputDialog(null, "ip를 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
                     break;
 
                default:
                     break;
           }
+     }
+
+     public static void main(String[] args) {
+          new Dial(2);
      }
 }
