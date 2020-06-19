@@ -69,7 +69,7 @@ class ConnectedClient extends Thread {
                     Major = st.nextToken();
                 }
                 if (Identity.contentEquals("Student")) DB.student(role, ID, PW, Name, Major);
-                else if (Identity.contentEquals("Professor")) DB.professor(role, ID, PW);
+                else if (Identity.contentEquals("Professor")) DB.professor(role, ID, PW, Name, Major);
             }
         } catch (Exception e) {
 
