@@ -39,6 +39,7 @@ class ConnectedClient extends Thread {
     String PW;
     String Name;
     String Major;
+    String Identity;
     DB DB = new DB();
 
     ConnectedClient(Socket _s) {
@@ -55,12 +56,20 @@ class ConnectedClient extends Thread {
             while(true) {
                 String User = dataInStream.readUTF();
                 StringTokenizer st = new StringTokenizer(User, "/");
+                Identity = st.nextToken();
                 role = st.nextToken();
                 ID = st.nextToken();
                 PW = st.nextToken();
-                Name = st.nextToken();
-                Major = st.nextToken();
-                DB.student(role, ID, PW, Name, Major);
+                if (role.contentEquals("0") || role.contentEquals("2")) {
+                    Name = "";
+                    Major = "";
+                }
+                else if (role.contentEquals("1")) {
+                    Name = st.nextToken();
+                    Major = st.nextToken();
+                }
+                if (Identity.contentEquals("Student")) DB.student(role, ID, PW, Name, Major);
+                else if (Identity.contentEquals("Professor")) DB.professor(role, ID, PW);
             }
         } catch (Exception e) {
 

@@ -60,6 +60,7 @@ public class Client_P_Create extends JFrame {
 		String PName;
 		String PMaj;
 		String role;
+		String Identity;
 		String finalString;
 		
 		public void actionPerformed(ActionEvent T) {
@@ -69,6 +70,7 @@ public class Client_P_Create extends JFrame {
 				PPW = t2.getText();
 				PName = t3.getText();
 				PMaj = t4.getText();
+				Identity = "Professor";
 				
 				if (!(PID.equals("")) && !(PPW.equals("")) && 
 						!(PName.equals("")) && !(PMaj.equals(""))) {
@@ -80,7 +82,7 @@ public class Client_P_Create extends JFrame {
 						outStream = s.getOutputStream();
 						dataOutputStream = new DataOutputStream(outStream);
 						role = "1";
-						finalString = role + "/" + PID + "/" + PPW + "/" + PName + "/" + PMaj;
+						finalString = Identity + "/" + role + "/" + PID + "/" + PPW + "/" + PName + "/" + PMaj;
 						dataOutputStream.writeUTF(finalString);
 						new Dial(1);
 					} catch (Exception e) {
