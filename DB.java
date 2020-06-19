@@ -40,13 +40,13 @@ public class DB {
 		return rs1;
 	}
 
-	public static ResultSet professor(String role, String id, String PW) {
+	public static ResultSet professor(String role, String id, String PW, String Name, String Major) {
 		if (role.contentEquals("0"))
 			SQLEXECUTER = "select from Client_P_INFO_TABLE WHERE id='" + id;
 
 		else if (role.contentEquals("1"))
-			SQLEXECUTER = "insert into Client_P_INFO_TABLE values('" + id + "'," + "'" + PW + "')";
-
+			SQLEXECUTER = "insert into Client_P_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
+					+ "')";
 		else if (role.contentEquals("2"))
 			SQLEXECUTER = "delete from Client_P_INFO_TABLE WHERE ID='" + id + "'";
 
