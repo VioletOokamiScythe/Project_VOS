@@ -1,62 +1,62 @@
 import java.io.*;
 import java.net.*;
-
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
-import javax.swing.*;
-import javax.swing.event.*;
 
-public class Client_T_Guest extends JFrame {
+public class Client_T_Guest {
+
+     
+     Dial dial = new Dial(6);
+
      final int w = Toolkit.getDefaultToolkit().getScreenSize().width,
                h = Toolkit.getDefaultToolkit().getScreenSize().height;
-     JPanel basePanel = new JPanel();
-     JTextField IP = new JTextField();
-     JButton B = new JButton();
+
+     // 툴킷으로 컴퓨터의 해상도를 받아옴 (화면 캡쳐에 필요해)
 
      public static void main(String[] args) {
+
           new Client_T_Guest();
+
+          // 메인에서는 클라이언트 생성자만 실행시켜주면 됌
+
      }
 
-     Client_T_Guest(){
-          setContentPane(basePanel);
-          basePanel.setLayout(null);
-          IP.setBounds(28, 28, 112, 28);
-          basePanel.add(IP);
-          basePanel.add(B);
-          B.setBounds(125, 125, 56, 56);
-          B.addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent arg0){
-                    Client_T_Guest.this.Client_work();
-               }
-          });
+     // 메인에서 호출시킨 생성자부분
 
-          setSize(new Dimension(280,280));
-          setVisible(true);
-     }
+     public Client_T_Guest() {
 
-     public void Client_work(){
-          String serverip = IP.getText();
+          String serverip;
+          serverip = dial.getCode();
 
-          Socket socket =null;
+          Socket socket = null;
+
+          System.out.println("클라이언트 준비완료");// 일단 소켓생성
+
           try {
-               socket =new Socket(serverip,5628);
 
-               BufferedImage image;
-               Robot R=new Robot();
-               BufferedOutputStream bout=new BufferedOutputStream(socket.getOutputStream());
+               socket = new Socket(serverip, 5656);
+               System.out.println("접속완료 - 클라이언트");
+
+               BufferedImage image; // 스크린샷이 저장될 버퍼공간
+               Robot r = new Robot(); // 스크린샷을 찍는 로봇클래스
+               BufferedOutputStream bout = new BufferedOutputStream(socket.getOutputStream());
+
+               // 아웃풋스트림을 버퍼아웃풋으로
 
                while (true) {
-                    image = R.createScreenCapture(new Rectangle(0,0,w,h));
-                    ImageIO.write(image,"bmp",bout);
-                    bout.flush();
 
+                    image = r.createScreenCapture(new Rectangle(0, 0, w, h));
+                    // 스크린샷을 찍어서 image에 저장해
+                    ImageIO.write(image, "bmp", bout);// 그 이미지를 png파일로 소켓 아웃풋스트림으로 쏴줌
+                    bout.flush(); // 버퍼에 쓰인 이미지를 서버로 보냄
                }
+
           } catch (Exception e) {
-               //TODO: handle exception
-               e.printStackTrace();
+               e.printStackTrace(); // 오류 처리
+               System.out.println("접속실패 - 클라이언트");
 
           }
+
      }
 }

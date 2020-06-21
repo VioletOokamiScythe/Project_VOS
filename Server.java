@@ -11,7 +11,7 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         try {
-            server.ss = new ServerSocket(5656);
+            server.ss = new ServerSocket(8484);
             System.out.println("Server Socket is created");
             while(true) {
                 Socket socket = server.ss.accept(); //소켓 생성
@@ -22,7 +22,7 @@ public class Server {
         } catch(Exception e) {
 
         }
-        
+         
     }
         
 }

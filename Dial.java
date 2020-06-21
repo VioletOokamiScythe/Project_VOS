@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Dial extends JFrame {
+
+     String Code;
      Dial(int i) {
           switch (i) {
                case 0:
@@ -30,7 +32,8 @@ public class Dial extends JFrame {
                     JOptionPane.showInputDialog(null, "시험 코드를 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
                     break;
                case 6: // 임시
-                    JOptionPane.showInputDialog(null, "ip를 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
+                    Code=JOptionPane.showInputDialog(null, "ip를 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
+                    
                     break;
 
                default:
@@ -39,6 +42,10 @@ public class Dial extends JFrame {
      }
 
      public static void main(String[] args) {
-          new Dial(2);
+
+     }
+
+     public String getCode(){
+          return Code;
      }
 }
