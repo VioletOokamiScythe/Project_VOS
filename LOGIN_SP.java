@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 import java.io.*;
 import java.net.*;
@@ -137,7 +136,7 @@ public class LOGIN_SP extends JFrame{
 
 
     public static void main(String[] args) {
-        LOGIN_SP L=new LOGIN_SP();
+       new LOGIN_SP();
     }
 }
 
