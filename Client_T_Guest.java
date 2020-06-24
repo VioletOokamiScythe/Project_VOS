@@ -4,33 +4,24 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-public class Client_T_Guest {
+public class Client_T_Guest{
 
-     
      Dial dial = new Dial(6);
 
      final int w = Toolkit.getDefaultToolkit().getScreenSize().width,
                h = Toolkit.getDefaultToolkit().getScreenSize().height;
 
-     // 툴킷으로 컴퓨터의 해상도를 받아옴 (화면 캡쳐에 필요해)
 
      public static void main(String[] args) {
-
           new Client_T_Guest();
-
-          // 메인에서는 클라이언트 생성자만 실행시켜주면 됌
-
      }
 
      // 메인에서 호출시킨 생성자부분
 
      public Client_T_Guest() {
 
-          String serverip;
-          serverip = dial.getCode();
-
+          String serverip = dial.getCode();
           Socket socket = null;
-
           System.out.println("클라이언트 준비완료");// 일단 소켓생성
 
           try {
@@ -46,17 +37,22 @@ public class Client_T_Guest {
 
                while (true) {
 
-                    image = r.createScreenCapture(new Rectangle(0, 0, w, h));
+                    image = r.createScreenCapture(new Rectangle(0, 0, w/2, h));
                     // 스크린샷을 찍어서 image에 저장해
-                    ImageIO.write(image, "bmp", bout);// 그 이미지를 png파일로 소켓 아웃풋스트림으로 쏴줌
+                    ImageIO.write(image, "JPEG", bout);// 그 이미지를 png파일로 소켓 아웃풋스트림으로 쏴줌
                     bout.flush(); // 버퍼에 쓰인 이미지를 서버로 보냄
                }
-
           } catch (Exception e) {
                e.printStackTrace(); // 오류 처리
                System.out.println("접속실패 - 클라이언트");
-
           }
+     }
 
+     class bot extends Thread{
+          Robot robot;
+
+          public void run() {
+               
+          }
      }
 }
