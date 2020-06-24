@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Client_T extends JFrame {
-    //MyListener ml = new MyListener();
+    // MyListener ml = new MyListener();
 
     JFrame CTFrame = new JFrame();
     JButton btnCam = new JButton("카메라 공간");
@@ -29,9 +29,10 @@ public class Client_T extends JFrame {
         Client_T CT = new Client_T();
     }
 
-    /*class MyListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }*/
+    /*
+     * class MyListener implements ActionListener { public void
+     * actionPerformed(ActionEvent e) {
+     * 
+     * } }
+     */
 }

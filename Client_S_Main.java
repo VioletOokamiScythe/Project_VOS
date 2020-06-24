@@ -5,11 +5,10 @@ import javax.swing.event.*;
 
 public class Client_S_Main extends JFrame {
 
-    //환경 변수 생성
-
+    // 환경 변수 생성
 
     // 패널 작업
-    JPanel basePanel = new JPanel(new BorderLayout(9,9));
+    JPanel basePanel = new JPanel(new BorderLayout(9, 9));
     JPanel westPanel = new JPanel(new FlowLayout());
     JPanel LEFTPanel = new JPanel(new FlowLayout());
     JPanel southPanel = new JPanel(new FlowLayout());
@@ -42,59 +41,58 @@ public class Client_S_Main extends JFrame {
         setVisible(true);
         setContentPane(basePanel);
 
-        //컴포넌트 배치 및 설정
-        westPanel.setPreferredSize(new Dimension(336,basePanel.getHeight()));
+        // 컴포넌트 배치 및 설정
+        westPanel.setPreferredSize(new Dimension(336, basePanel.getHeight()));
 
-        Title.setPreferredSize(new Dimension(336,56));
-        Title.setFont(new Font("Consolas",Font.BOLD,18));
+        Title.setPreferredSize(new Dimension(336, 56));
+        Title.setFont(new Font("Consolas", Font.BOLD, 18));
         Title.setHorizontalAlignment(JTextField.CENTER);
 
-        Mode.setPreferredSize(new Dimension(112,28));
-        Mode.setFont(new Font("Serif",Font.PLAIN,18));
-        
-        ModeLabel.setPreferredSize(new Dimension(112,28));
-        ModeLabel.setFont(new Font("Serif",Font.PLAIN,18));
-        ModeLabel.setText("text");
-        
-        Name.setPreferredSize(new Dimension(112,28));
-        Name.setFont(new Font("Serif",Font.PLAIN,18));
-        
-        nameLabel.setPreferredSize(new Dimension(112,28));
-        nameLabel.setFont(new Font("Serif",Font.PLAIN,18));
-        nameLabel.setText("text");
-        
-        SID.setPreferredSize(new Dimension(112,28));
-        SID.setFont(new Font("Serif",Font.PLAIN,18));
-        
-        IDLabel.setPreferredSize(new Dimension(112,28));
-        IDLabel.setFont(new Font("Serif",Font.PLAIN,18));
-        IDLabel.setText("text");
-        
-        Major.setPreferredSize(new Dimension(112,28));
-        Major.setFont(new Font("Serif",Font.PLAIN,18));
-        
-        majorLabel.setPreferredSize(new Dimension(112,28));
-        majorLabel.setFont(new Font("Serif",Font.PLAIN,18));
-        majorLabel.setText("text");
-        
-        TestTime.setPreferredSize(new Dimension(168,28));
-        TestTime.setFont(new Font("Serif",Font.PLAIN,14));
-        
-        TestTimeLabel.setPreferredSize(new Dimension(112,28));
-        TestTimeLabel.setFont(new Font("Serif",Font.PLAIN,14));
-        TestTimeLabel.setText("text");
-        
-        ExamCode.setPreferredSize(new Dimension(168,28));
-        ExamCode.setFont(new Font("Serif",Font.PLAIN,14));
-        
-        ExamCodeLabel.setPreferredSize(new Dimension(112,28));
-        ExamCodeLabel.setFont(new Font("Serif",Font.PLAIN,14));
-        ExamCodeLabel.setText("text");
-        
+        Mode.setPreferredSize(new Dimension(112, 28));
+        Mode.setFont(new Font("Serif", Font.PLAIN, 18));
 
-        basePanel.add(westPanel,BorderLayout.WEST);
-        basePanel.add(LEFTPanel,BorderLayout.CENTER);
-        basePanel.add(southPanel,BorderLayout.SOUTH);
+        ModeLabel.setPreferredSize(new Dimension(112, 28));
+        ModeLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        ModeLabel.setText("text");
+
+        Name.setPreferredSize(new Dimension(112, 28));
+        Name.setFont(new Font("Serif", Font.PLAIN, 18));
+
+        nameLabel.setPreferredSize(new Dimension(112, 28));
+        nameLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        nameLabel.setText("text");
+
+        SID.setPreferredSize(new Dimension(112, 28));
+        SID.setFont(new Font("Serif", Font.PLAIN, 18));
+
+        IDLabel.setPreferredSize(new Dimension(112, 28));
+        IDLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        IDLabel.setText("text");
+
+        Major.setPreferredSize(new Dimension(112, 28));
+        Major.setFont(new Font("Serif", Font.PLAIN, 18));
+
+        majorLabel.setPreferredSize(new Dimension(112, 28));
+        majorLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        majorLabel.setText("text");
+
+        TestTime.setPreferredSize(new Dimension(168, 28));
+        TestTime.setFont(new Font("Serif", Font.PLAIN, 14));
+
+        TestTimeLabel.setPreferredSize(new Dimension(112, 28));
+        TestTimeLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        TestTimeLabel.setText("text");
+
+        ExamCode.setPreferredSize(new Dimension(168, 28));
+        ExamCode.setFont(new Font("Serif", Font.PLAIN, 14));
+
+        ExamCodeLabel.setPreferredSize(new Dimension(112, 28));
+        ExamCodeLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        ExamCodeLabel.setText("text");
+
+        basePanel.add(westPanel, BorderLayout.WEST);
+        basePanel.add(LEFTPanel, BorderLayout.CENTER);
+        basePanel.add(southPanel, BorderLayout.SOUTH);
 
         westPanel.add(Title);
         westPanel.add(Mode);
@@ -114,7 +112,6 @@ public class Client_S_Main extends JFrame {
         southPanel.add(SaveButton);
         southPanel.add(ModifyButton);
 
-
         StartRemoteControl.addActionListener(SMA);
         SaveButton.addActionListener(SMA);
         ModifyButton.addActionListener(SMA);
@@ -126,20 +123,20 @@ public class Client_S_Main extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            if (e.getSource()==StartRemoteControl) {
-                
+            if (e.getSource() == StartRemoteControl) {
+
             }
-            if (e.getSource()==SaveButton) {
+            if (e.getSource() == SaveButton) {
                 new Client_S_Save();
             }
-            if (e.getSource()==ModifyButton) {
-                
+            if (e.getSource() == ModifyButton) {
+
             }
         }
-        
+
     }
 
-    S_Main_Action SMA=new S_Main_Action();
+    S_Main_Action SMA = new S_Main_Action();
 
     public static void main(String[] args) {
         Client_S_Main CSM = new Client_S_Main();

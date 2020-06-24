@@ -4,13 +4,12 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-public class Client_T_Guest{
+public class Client_T_Guest {
 
      Dial dial = new Dial(6);
 
      final int w = Toolkit.getDefaultToolkit().getScreenSize().width,
                h = Toolkit.getDefaultToolkit().getScreenSize().height;
-
 
      public static void main(String[] args) {
           new Client_T_Guest();
@@ -37,7 +36,7 @@ public class Client_T_Guest{
 
                while (true) {
 
-                    image = r.createScreenCapture(new Rectangle(0, 0, w/2, h));
+                    image = r.createScreenCapture(new Rectangle(0, 0, w / 2, h));
                     // 스크린샷을 찍어서 image에 저장해
                     ImageIO.write(image, "JPEG", bout);// 그 이미지를 png파일로 소켓 아웃풋스트림으로 쏴줌
                     bout.flush(); // 버퍼에 쓰인 이미지를 서버로 보냄
@@ -48,11 +47,11 @@ public class Client_T_Guest{
           }
      }
 
-     class bot extends Thread{
+     class bot extends Thread {
           Robot robot;
 
           public void run() {
-               
+
           }
      }
 }

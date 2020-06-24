@@ -12,18 +12,18 @@ public class Client_P_Save extends JFrame{
 
 	Client_P_Save() {
 		JPanel P = new JPanel();
-		Label l1 = new Label("Professor ID");
-		Label l3 = new Label("NAME");
-		Label l4 = new Label("Major");
-		Label l5 = new Label("시험코드");
+		JLabel l1 = new JLabel("Professor ID");
+		JLabel l3 = new JLabel("NAME");
+		JLabel l4 = new JLabel("Major");
+		JLabel l5 = new JLabel("시험코드");
 
 
 
-		Label R_HEX=new Label("R");
+		JLabel R_HEX=new JLabel("R");
 		add(R_HEX);
-		Label G_HEX=new Label("G");
+		JLabel G_HEX=new JLabel("G");
 		add(G_HEX);
-		Label B_HEX=new Label("B");
+		JLabel B_HEX=new JLabel("B");
 		add(B_HEX);
 
 
@@ -32,10 +32,10 @@ public class Client_P_Save extends JFrame{
 		add(l3);
 		add(l4);
 		add(l5);
-		TextField t1 = new TextField();
-		TextField t3 = new TextField();
-		TextField t4 = new TextField();
-		TextField t5 = new TextField();
+		JTextField t1 = new JTextField();
+		JTextField t3 = new JTextField();
+		JTextField t4 = new JTextField();
+		JTextField t5 = new JTextField();
 		
 
 

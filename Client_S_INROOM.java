@@ -9,7 +9,6 @@ import javax.swing.event.*;
 
 public class Client_S_INROOM extends JFrame {
 
-
     // 패널 생성
     JPanel BasePanel = new JPanel(new BorderLayout());
     JPanel CenterPanel = new JPanel(new BorderLayout());
@@ -22,10 +21,7 @@ public class Client_S_INROOM extends JFrame {
 
     Client_S_INROOM() {
 
-       
-    //마우스 감지
-
-   
+        // 마우스 감지
 
         // 컴포넌트 설정
         EXAM_EXIT.setPreferredSize(new Dimension(168, 28));
@@ -51,29 +47,28 @@ public class Client_S_INROOM extends JFrame {
         setUndecorated(true);
         setVisible(true);
 
-         // 이미지 받아올 소켓 생성
-         ServerSocket SS = null;
-         Socket S = null;
- 
-         try {
-            
-             SS = new ServerSocket(5656);
-             S = SS.accept();
-             System.out.println("클라이언트가 연결되었습니다 " + S);
-             BufferedInputStream BIS = new BufferedInputStream(S.getInputStream());
- 
-             while (true) {
-                 CenterPanel.getGraphics().drawImage(ImageIO.read(ImageIO.createImageInputStream(BIS)), 0, 0,
-                         CenterPanel.getWidth()/2, CenterPanel.getHeight(), CenterPanel);
-             }
-         } catch (Exception e) {
-             // TODO: handle exception
-         }
+        // 이미지 받아올 소켓 생성
+        ServerSocket SS = null;
+        Socket S = null;
+
+        try {
+
+            SS = new ServerSocket(5656);
+            S = SS.accept();
+            System.out.println("클라이언트가 연결되었습니다 " + S);
+            BufferedInputStream BIS = new BufferedInputStream(S.getInputStream());
+
+            while (true) {
+                CenterPanel.getGraphics().drawImage(ImageIO.read(ImageIO.createImageInputStream(BIS)), 0, 0,
+                        CenterPanel.getWidth() / 2, CenterPanel.getHeight(), CenterPanel);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
-    class S_InRoom_Action implements ActionListener{
-       
-        
+    class S_InRoom_Action implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
@@ -84,11 +79,11 @@ public class Client_S_INROOM extends JFrame {
         }
     }
 
-    class S_InRoom_MK implements MouseListener, KeyListener{
+    class S_InRoom_MK implements MouseListener, KeyListener {
         @Override
         public void mouseClicked(MouseEvent e) {
             // TODO Auto-generated method stub
-            
+
         }
 
         @Override
@@ -106,6 +101,12 @@ public class Client_S_INROOM extends JFrame {
         @Override
         public void mouseEntered(MouseEvent e) {
             // TODO Auto-generated method stub
+            try {
+                Robot robot=new Robot();
+                robot.mouseMove(EXAM_EXIT.getX(), EXAM_EXIT.getY());
+            } catch (Exception e2) {
+                //TODO: handle exception
+            }
 
         }
 
@@ -113,12 +114,12 @@ public class Client_S_INROOM extends JFrame {
         public void mouseExited(MouseEvent e) {
             // TODO Auto-generated method stub
             try {
-                Robot robot=new Robot();
+                Robot robot = new Robot();
                 robot.mouseMove(500, 600);
             } catch (Exception e2) {
-                //TODO: handle exception
+                // TODO: handle exception
             }
-            
+
         }
 
         @Override
@@ -140,11 +141,9 @@ public class Client_S_INROOM extends JFrame {
         }
 
     }
-    
-    
 
     S_InRoom_Action SIRA = new S_InRoom_Action();
-    S_InRoom_MK SIMK=new S_InRoom_MK();
+    S_InRoom_MK SIMK = new S_InRoom_MK();
 
     public static void main(String[] args) {
         Client_S_INROOM CSI = new Client_S_INROOM();

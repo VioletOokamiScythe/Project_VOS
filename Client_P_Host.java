@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.security.Key;
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -7,10 +8,13 @@ import javax.imageio.ImageIO;
 
 public class Client_P_Host {
 
-     final int w = 1280, h = 720;
+     final int w = Toolkit.getDefaultToolkit().getScreenSize().width / 2,
+               h = Toolkit.getDefaultToolkit().getScreenSize().height;
 
      final int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - w / 2,
                y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - h / 2;
+
+     
 
      JFrame frame;
 
@@ -24,6 +28,7 @@ public class Client_P_Host {
 
      public Client_P_Host() {
 
+
           frame = new JFrame("server");
 
           frame.setBounds(x, y, w, h);
@@ -32,6 +37,9 @@ public class Client_P_Host {
 
           frame.setVisible(true);
 
+          frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width-w*2, Toolkit.getDefaultToolkit().getScreenSize().height-h);
+
+          
           // 창을 만들고
 
           ServerSocket socket_s = null;
@@ -40,7 +48,7 @@ public class Client_P_Host {
 
           try {
 
-               socket_s = new ServerSocket(443);
+               socket_s = new ServerSocket(5656);
 
                socket = socket_s.accept();
 

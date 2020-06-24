@@ -73,7 +73,7 @@ public class DB {
 	}
 
 	public static void Check_EC_Duplicate(String ExamCode) {
-		SQLEXECUTER = "select from 보려는 코드 테이블 WHERE DB에 있는 코드 = ?"; //추가 필요
+		SQLEXECUTER = "select from 보려는 코드 테이블 WHERE DB에 있는 코드 = ?"; // 추가 필요
 		boolean confirm = false;
 
 		try {
@@ -82,29 +82,30 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "", "1111"); //추가 필요
+			Connection con = DriverManager.getConnection(URL, "", "1111"); // 추가 필요
 			PreparedStatement pstmt = con.prepareStatement(SQLEXECUTER);
 			System.out.println("Successful connection to SQL Server.");
-			pstmt.setString(1, ExamCode); //int형이면 setInt로 바꿔주세요
+			pstmt.setString(1, ExamCode); // int형이면 setInt로 바꿔주세요
 			ResultSet checkTable = pstmt.executeQuery();
 			while (checkTable.next()) {
-				String check = checkTable.getString(1); //혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
-				if(check.equals(ExamCode)) confirm = true; //중복 발견
+				String check = checkTable.getString(1); // 혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
+				if (check.equals(ExamCode))
+					confirm = true; // 중복 발견
 			}
 			System.out.println("Query operation was successful.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed connection to SQL Server.");
 		}
-		if (confirm == true) { //중복 있음
+		if (confirm == true) { // 중복 있음
 
-		} else if (confirm == false) { //중복 없음
+		} else if (confirm == false) { // 중복 없음
 
 		}
 	}
 
 	public static void Check_ET_Duplicate(String ExamTime) {
-		SQLEXECUTER = "select from 보려는 시간 테이블 WHERE DB에 있는 시간 = ?"; //추가 필요
+		SQLEXECUTER = "select from 보려는 시간 테이블 WHERE DB에 있는 시간 = ?"; // 추가 필요
 		boolean confirm = false;
 
 		try {
@@ -113,29 +114,30 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "", "1111"); //추가 필요
+			Connection con = DriverManager.getConnection(URL, "", "1111"); // 추가 필요
 			PreparedStatement pstmt = con.prepareStatement(SQLEXECUTER);
 			System.out.println("Successful connection to SQL Server.");
-			pstmt.setString(1, ExamTime); //int형이면 setInt로 바꿔주세요
+			pstmt.setString(1, ExamTime); // int형이면 setInt로 바꿔주세요
 			ResultSet checkTable = pstmt.executeQuery();
 			while (checkTable.next()) {
-				String check = checkTable.getString(1); //혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
-				if(check.equals(ExamTime)) confirm = true; //중복 발견
+				String check = checkTable.getString(1); // 혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
+				if (check.equals(ExamTime))
+					confirm = true; // 중복 발견
 			}
 			System.out.println("Query operation was successful.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed connection to SQL Server.");
 		}
-		if (confirm == true) { //중복 있음
+		if (confirm == true) { // 중복 있음
 
-		} else if (confirm == false) { //중복 없음
+		} else if (confirm == false) { // 중복 없음
 
 		}
 	}
 
 	public static void Check_ER_Duplicate(String ExamRoom) {
-		SQLEXECUTER = "select from 보려는 방 테이블 WHERE DB에 있는 방 = ?"; //추가 필요
+		SQLEXECUTER = "select from 보려는 방 테이블 WHERE DB에 있는 방 = ?"; // 추가 필요
 		boolean confirm = false;
 
 		try {
@@ -144,23 +146,24 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "", "1111"); //추가 필요
+			Connection con = DriverManager.getConnection(URL, "", "1111"); // 추가 필요
 			PreparedStatement pstmt = con.prepareStatement(SQLEXECUTER);
 			System.out.println("Successful connection to SQL Server.");
-			pstmt.setString(1, ExamRoom); //int형이면 setInt로 바꿔주세요
+			pstmt.setString(1, ExamRoom); // int형이면 setInt로 바꿔주세요
 			ResultSet checkTable = pstmt.executeQuery();
 			while (checkTable.next()) {
-				String check = checkTable.getString(1); //혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
-				if(check.equals(ExamRoom)) confirm = true; //중복 발견
+				String check = checkTable.getString(1); // 혹시 찾으려는 정보가 테이블의 1번째가 아닌 다른 번째에 있으면 바꿔주세요
+				if (check.equals(ExamRoom))
+					confirm = true; // 중복 발견
 			}
 			System.out.println("Query operation was successful.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Failed connection to SQL Server.");
 		}
-		if (confirm == true) { //중복 있음
+		if (confirm == true) { // 중복 있음
 
-		} else if (confirm == false) { //중복 없음
+		} else if (confirm == false) { // 중복 없음
 
 		}
 	}
