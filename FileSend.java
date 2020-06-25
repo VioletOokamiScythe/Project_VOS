@@ -9,7 +9,7 @@ public class FileSend {
     public static final int DEFAULT_BUFFER_SIZE = 10000;
 
     public static void main(String[] args) {
-        String serverIP = "211.250.161.63";
+        String serverIP = "VioletOokamiScythe.iptime.org";
         int port = Integer.parseInt("8484");
         String FileName = "text.txt";
 

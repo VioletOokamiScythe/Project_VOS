@@ -206,7 +206,7 @@ class Client_S_Login extends JFrame {
                     OutputStream outStream;
                     DataOutputStream dataOutputStream;
                     try {
-                        s = new Socket("211.250.161.63", 5656);
+                        s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "0";
@@ -334,7 +334,7 @@ class Client_S_Create extends JFrame {
                     OutputStream outStream;
                     DataOutputStream dataOutputStream;
                     try {
-                        s = new Socket("211.250.161.63", 5656);
+                        s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "1";
@@ -431,7 +431,7 @@ class Client_P_Login extends JFrame {
                     OutputStream outStream;
                     DataOutputStream dataOutputStream;
                     try {
-                        s = new Socket("211.250.161.63", 5656);
+                        s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "0";
@@ -523,7 +523,7 @@ class Client_P_Create extends JFrame {
                     OutputStream outStream;
                     DataOutputStream dataOutputStream;
                     try {
-                        s = new Socket("211.250.161.63", 5656);
+                        s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "1";

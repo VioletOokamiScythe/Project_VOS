@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Server {
     ServerSocket ss = null;
-    ArrayList<ConnectedClient> clients = new ArrayList<ConnectedClient>();
+    ArrayList<Login> clients = new ArrayList<Login>();
     
     public static void main(String[] args) {
         Server server = new Server();
         try {
-            server.ss = new ServerSocket(8484);
+            server.ss = new ServerSocket(5656);
             System.out.println("Server Socket is created");
             while(true) {
                 Socket socket = server.ss.accept(); //소켓 생성
-                ConnectedClient cc = new ConnectedClient(socket);
+                Login cc = new Login(socket);
                 server.clients.add(cc);
                 cc.start();
             }
@@ -25,7 +25,7 @@ public class Server {
         
 }
 
-class ConnectedClient extends Thread {
+class Login extends Thread {
     Socket socket;
     OutputStream outStream;
     DataOutputStream dataOutStream;
@@ -40,7 +40,7 @@ class ConnectedClient extends Thread {
     String Identity;
     DB DB = new DB();
 
-    ConnectedClient(Socket _s) {
+    Login(Socket _s) {
         this.socket = _s;
     }
 
@@ -74,3 +74,4 @@ class ConnectedClient extends Thread {
         }
     }
 }
+

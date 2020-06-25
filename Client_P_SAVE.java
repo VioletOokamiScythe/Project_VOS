@@ -124,10 +124,6 @@ public class Client_P_Save extends JFrame{
 						BValue.setText(String.format("%02X", B.getValue()));
 						t5.setText(RValue.getText()+GValue.getText()+BValue.getText());
 					}
-					
-					
-					
-					
 				}
 		
 				@Override

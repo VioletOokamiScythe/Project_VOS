@@ -8,7 +8,7 @@ public class DB {
 	static ResultSet rs1;
 	static ResultSet rs2;
 	static String Name;
-	static String URL = "jdbc:sqlserver://211.250.161.63:1433;database=VOS;integreatedSercurity=true";
+	static String URL = "jdbc:sqlserver://VioletOokamiScythe.iptime.org:1433;database=VOS;integreatedSercurity=true";
 
 	public static ResultSet student(String role, String id, String PW, String Name, String Major) {
 		if (role.contentEquals("0"))
@@ -82,7 +82,7 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "", "1111"); // 추가 필요
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
 			PreparedStatement pstmt = con.prepareStatement(SQLEXECUTER);
 			System.out.println("Successful connection to SQL Server.");
 			pstmt.setString(1, ExamCode); // int형이면 setInt로 바꿔주세요
