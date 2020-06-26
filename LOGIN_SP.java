@@ -31,6 +31,7 @@ public class LOGIN_SP extends JFrame {
 
     JButton fJButton1 = new JButton("NEXT");
     JButton fJButton2 = new JButton("Create");
+    JButton fJButton3 = new JButton("Close");
 
     // 두번째 화면 패널 작업
     JPanel secondNorthPanel = new JPanel(new FlowLayout());
@@ -71,6 +72,9 @@ public class LOGIN_SP extends JFrame {
                     new Client_P_Create();
                     dispose();
                 }
+                if (e.getSource() == fJButton3) {
+                	dispose();
+                }
             }
 
         }
@@ -79,7 +83,7 @@ public class LOGIN_SP extends JFrame {
 
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("VOS - Create S");
+        setTitle("VOS - Login & Create");
         setSize(450, 280);
         setVisible(true);
         setContentPane(BasePanel);
@@ -103,20 +107,25 @@ public class LOGIN_SP extends JFrame {
 
         firstSouthPanel.add(fJButton1);
         firstSouthPanel.add(fJButton2);
+        firstSouthPanel.add(fJButton3);
 
         fJButton1.addActionListener(l);
         fJButton2.addActionListener(l);
+        fJButton3.addActionListener(l);
 
         // 첫번째 패널의 컴포넌트 설정
         titleJLabel.setPreferredSize(new Dimension(168, 56));
+        titleJLabel.setHorizontalAlignment(JLabel.CENTER);
         subtitleJLabel.setPreferredSize(new Dimension(168, 45));
+        subtitleJLabel.setHorizontalAlignment(JLabel.CENTER);
 
         fJLabel1.setPreferredSize(new Dimension(168, 36));
         fJLabel2.setPreferredSize(new Dimension(168, 36));
         blankJLabel.setPreferredSize(new Dimension(450, 18));
 
-        fJButton1.setPreferredSize(new Dimension(168, 36));
-        fJButton2.setPreferredSize(new Dimension(168, 36));
+        fJButton1.setPreferredSize(new Dimension(120, 36));
+        fJButton2.setPreferredSize(new Dimension(120, 36));
+        fJButton3.setPreferredSize(new Dimension(120, 36));
 
         // 그룹설정
         G1.add(R1);
@@ -137,7 +146,7 @@ class Client_S_Login extends JFrame {
     JLabel l2 = new JLabel("PW");
 
     JTextField t1 = new JTextField();
-    JTextField t2 = new JTextField();
+    JPasswordField t2 = new JPasswordField();
 
     // 루트 패널 생성
     JPanel BasePanel = new JPanel(new BorderLayout(9, 9));
@@ -151,7 +160,7 @@ class Client_S_Login extends JFrame {
     Client_S_Login() {
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("VOS - Create S");
+        setTitle("VOS - Login S");
         setSize(450, 280);
         setVisible(true);
         setContentPane(BasePanel);
@@ -246,7 +255,7 @@ class Client_S_Create extends JFrame {
     JLabel l4 = new JLabel("Major");
 
     JTextField t1 = new JTextField();
-    JTextField t2 = new JTextField();
+    JPasswordField t2 = new JPasswordField();
     JTextField t3 = new JTextField();
     JTextField t4 = new JTextField();
 
@@ -341,7 +350,6 @@ class Client_S_Create extends JFrame {
                         finalString = Identity + "/" + role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
                         dataOutputStream.writeUTF(finalString);
                         new Dial(1);
-                        dispose();
                     } catch (Exception e0) {
                         // TODO: handle exception
 
@@ -351,6 +359,7 @@ class Client_S_Create extends JFrame {
             }
             if (e.getSource() == b2)
                 dispose();
+                new LOGIN_SP();
         }
     }
 }
@@ -362,17 +371,16 @@ class Client_P_Login extends JFrame {
     JTextField id;
     JPasswordField passwd;
     JPanel idPanel, paPanel, loginPanel, cpPanel;
-    JButton b1, b2, b3;
+    JButton b2, b3;
     JTextArea content;
 
     public Client_P_Login() {
-        super("VOS-Client P Login");
+        super("VOS - Login P");
         setLayout(new FlowLayout()); // 플로우 레이아웃 사용
 
         EtchedBorder eborder = new EtchedBorder();
 
         lbl = new JLabel("VOS - Very Objective System");
-        b1 = new JButton("Client P");
 
         lbl.setBorder(eborder);
 
@@ -384,9 +392,8 @@ class Client_P_Login extends JFrame {
         la3 = new JLabel("Professor ID");
         la2 = new JLabel("PW");
 
-        id = new JTextField(10);
-        passwd = new JPasswordField(5);
-        idPanel.add(b1);
+        id = new JTextField();
+        passwd = new JPasswordField();
         idPanel.add(la3);
         idPanel.add(id);
         paPanel.add(la2);
@@ -396,7 +403,7 @@ class Client_P_Login extends JFrame {
 
         b2 = new JButton("Login");
         b2.addActionListener(PLA);
-        b3 = new JButton("Create");
+        b3 = new JButton("Cancel");
         b3.addActionListener(PLA);
         loginPanel.add(b2);
         loginPanel.add(b3);
@@ -404,10 +411,17 @@ class Client_P_Login extends JFrame {
         add(idPanel);
         add(paPanel);
         add(loginPanel);
+        
+        la2.setPreferredSize(new Dimension(168, 36));
+        la3.setPreferredSize(new Dimension(168, 36));
+        id.setPreferredSize(new Dimension(168, 36));
+        passwd.setPreferredSize(new Dimension(168, 36));
+        b2.setPreferredSize(new Dimension(168, 28));
+        b3.setPreferredSize(new Dimension(168, 28));
 
-        setSize(300, 400);
+        setSize(450, 280);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }
 
@@ -419,8 +433,10 @@ class Client_P_Login extends JFrame {
         String Identity;
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == b3)
-                new Client_P_Create();
+            if (e.getSource() == b3) {
+            	dispose();
+            	new LOGIN_SP();
+            }
             if (e.getSource() == b2) {
                 PID = id.getText();
                 PPW = passwd.getText();
@@ -493,7 +509,7 @@ class Client_P_Create extends JFrame {
         j2.setBounds(240, 230, 80, 30);
         add(P);
         setSize(400, 400);
-        setTitle("VOS Client P");
+        setTitle("VOS - Create P");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
@@ -510,6 +526,7 @@ class Client_P_Create extends JFrame {
         public void actionPerformed(ActionEvent T) {
             if (T.getSource() == j2) {
                 dispose();
+                new LOGIN_SP();
             }
             if (T.getSource() == j1) {
                 PID = t1.getText();
