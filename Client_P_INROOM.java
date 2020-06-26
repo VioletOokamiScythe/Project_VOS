@@ -88,6 +88,67 @@ public class Client_P_INROOM extends JFrame {
                }
 
           }
+	   b1.addActionListener(new ActionListener() {
+
+              @Override
+              public void actionPerformed(ActionEvent bt) {
+                   JButton b1 = (JButton)bt.getSource();
+                   if(b1.getText().equals("1번째")) {
+                   b1.setText("1");
+                   basePanel.add(b1);
+                   }
+                   else if(b1.getText().equals("1")) {
+                   b1.setText("1번째");
+                   centerPanel.add(b1,GBC);
+                   }                   
+              } 
+         });
+         
+         b2.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent bt) {
+                  JButton b2 = (JButton)bt.getSource();
+                  if(b2.getText().equals("2번째")) {
+                  b2.setText("2");
+                  basePanel.add(b2);
+                  }
+                  else if(b2.getText().equals("2")) {
+                  b2.setText("2번째");
+                  centerPanel.add(b2,GBC2);
+                  }                   
+             } 
+        });
+         b3.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent bt) {
+                  JButton b3 = (JButton)bt.getSource();
+                  if(b3.getText().equals("3번째")) {
+                  b3.setText("3");
+                  basePanel.add(b3);
+                  }
+                  else if(b3.getText().equals("3")) {
+                  b3.setText("3번째");
+                  centerPanel.add(b3,GBC3);
+                  }                   
+             } 
+        });
+         b4.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent bt) {
+                  JButton b4 = (JButton)bt.getSource();
+                  if(b4.getText().equals("4번째")) {
+                  b4.setText("4");
+                  basePanel.add(b4);
+                  }
+                  else if(b4.getText().equals("4")) {
+                  b4.setText("4번째");
+                  centerPanel.add(b4,GBC4);
+                  }                   
+             } 
+        });  
 
           P_InRoom_Action PIRA = new P_InRoom_Action();
 
