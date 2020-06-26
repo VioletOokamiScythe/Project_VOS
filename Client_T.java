@@ -16,7 +16,7 @@ public class Client_T extends JFrame {
     Client_T() {
         CTFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         CTFrame.setTitle("VOS - Client T");
-        CTFrame.setSize(500, 300);
+        CTFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         JPanel addField = new JPanel();
         CTFrame.getContentPane().add(btnCam, BorderLayout.CENTER);
         CTFrame.getContentPane().add(addField, BorderLayout.SOUTH);
