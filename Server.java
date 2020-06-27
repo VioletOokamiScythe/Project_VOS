@@ -1,28 +1,29 @@
 import java.io.*;
 import java.net.*;
+import java.sql.*;
 import java.util.*;
 
 public class Server {
     ServerSocket ss = null;
     ArrayList<Login> clients = new ArrayList<Login>();
-    
+
     public static void main(String[] args) {
         Server server = new Server();
         try {
             server.ss = new ServerSocket(5656);
             System.out.println("Server Socket is created");
-            while(true) {
-                Socket socket = server.ss.accept(); //소켓 생성
+            while (true) {
+                Socket socket = server.ss.accept(); // 소켓 생성
                 Login cc = new Login(socket);
                 server.clients.add(cc);
                 cc.start();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
-         
+
     }
-        
+
 }
 
 class Login extends Thread {
@@ -31,13 +32,16 @@ class Login extends Thread {
     DataOutputStream dataOutStream;
     InputStream inStream;
     DataInputStream dataInStream;
-    
+
     String role;
     String ID;
     String PW;
     String Name;
     String Major;
     String Identity;
+    String Code;
+    String Room;
+    String Time;
     DB DB = new DB();
 
     Login(Socket _s) {
@@ -51,27 +55,100 @@ class Login extends Thread {
             dataOutStream = new DataOutputStream(outStream);
             inStream = this.socket.getInputStream();
             dataInStream = new DataInputStream(inStream);
-            while(true) {
+
+            while (true) {
                 String User = dataInStream.readUTF();
                 StringTokenizer st = new StringTokenizer(User, "/");
-                Identity = st.nextToken();
-                role = st.nextToken();
-                ID = st.nextToken();
-                PW = st.nextToken();
-                if (role.contentEquals("0") || role.contentEquals("2")) {
-                    Name = "";
-                    Major = "";
+                String mission = st.nextToken();
+                switch (mission) {
+                    case "LORC":
+                        LoginORCreate(st);
+                        break;
+
+                    case "File":
+                        break;
+
+                    case "Check":
+                        Check_TC(st);
+                        break;
+
+                    default:
+                        break;
                 }
-                else if (role.contentEquals("1")) {
-                    Name = st.nextToken();
-                    Major = st.nextToken();
-                }
-                if (Identity.contentEquals("Student")) DB.student(role, ID, PW, Name, Major);
-                else if (Identity.contentEquals("Professor")) DB.professor(role, ID, PW, Name, Major);
             }
         } catch (Exception e) {
 
         }
     }
-}
 
+    void LoginORCreate(StringTokenizer st) {
+        Identity = st.nextToken();
+        role = st.nextToken();
+        ID = st.nextToken();
+        PW = st.nextToken();
+
+        switch (role) {
+            case "0":
+                Name = "";
+                Major = "";
+                if (Identity.contentEquals("Student"))
+                    DB.student(role, ID, PW, Name, Major);
+                else if (Identity.contentEquals("Professor"))
+                    DB.professor(role, ID, PW, Name, Major);
+                break;
+
+            case "1":
+                Name = st.nextToken();
+                Major = st.nextToken();
+                if (Identity.contentEquals("Student"))
+                    DB.student(role, ID, PW, Name, Major);
+                else if (Identity.contentEquals("Professor"))
+                    DB.professor(role, ID, PW, Name, Major);
+                break;
+
+            case "2":
+                Name = "";
+                Major = "";
+                if (Identity.contentEquals("Student"))
+                    DB.student(role, ID, PW, Name, Major);
+                else if (Identity.contentEquals("Professor"))
+                    DB.professor(role, ID, PW, Name, Major);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void Check_TC(StringTokenizer st) {
+        role = st.nextToken();
+        String ExamCode = st.nextToken();
+
+        ResultSet Result;
+
+        switch (role) {
+            case "0":
+                Result = DB.Check_EC_Duplicate(ExamCode);
+                try {
+                    if (Result.next()) {
+                        new Dial(7);
+                    } else {
+                        try {
+                            outStream = this.socket.getOutputStream();
+                            dataOutStream = new DataOutputStream(outStream);
+                            dataOutStream.writeInt(0);
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+
+                    }
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}

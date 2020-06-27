@@ -57,7 +57,6 @@ public class Client_S_Save extends JFrame {
                          } catch (Exception e0) {
                               // TODO: handle exception
                          }
-
                     }
                }
           }
@@ -106,7 +105,6 @@ public class Client_S_Save extends JFrame {
                ExamTimeMINUTE.addItem(MIN[i]);
           }
           
-
      }
 
      public static void main(String[] args) {

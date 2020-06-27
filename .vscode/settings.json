@@ -7,7 +7,6 @@
     },
     "java.project.referencedLibraries": [
         "Referenced Libraries/mssql-jdbc-8.2.2.jre13.jar",
-        "Referenced Libraries/opencv-430.jar",
-        "Referenced Libraries/jmf-2.1.1e.jar"
+        "Referenced Libraries/opencv-430.jar"
     ]
 }

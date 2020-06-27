@@ -1,3 +1,5 @@
+import java.io.*;
+import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -5,7 +7,10 @@ import javax.swing.event.*;
 
 public class Client_S_Main extends JFrame {
 
-    // 환경 변수 생성
+    Socket S;
+
+    InputStream IS;
+    DataInputStream DIS;
 
     // 패널 작업
     JPanel basePanel = new JPanel(new BorderLayout(9, 9));
@@ -30,10 +35,19 @@ public class Client_S_Main extends JFrame {
     JLabel ExamCodeLabel = new JLabel();
 
     JButton StartRemoteControl = new JButton("원격 접속 실행");
-    JButton SaveButton = new JButton("로컬에 시험 정보 저장");
+    JButton SaveButton = new JButton("시험 정보 저장");
     JButton ModifyButton = new JButton("저장된 시험 정보 수정");
 
     Client_S_Main() {
+        try {
+            S = new Socket("VioletOokamiScythe.iptime.org", 5656);
+            
+            IS = this.S.getInputStream();
+            DIS = new DataInputStream(IS);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("VOS - Client S MAIN");

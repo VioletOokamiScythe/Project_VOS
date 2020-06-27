@@ -73,7 +73,7 @@ public class LOGIN_SP extends JFrame {
                     dispose();
                 }
                 if (e.getSource() == fJButton3) {
-                	dispose();
+                    dispose();
                 }
             }
 
@@ -202,6 +202,7 @@ class Client_S_Login extends JFrame {
             String PW;
             String role;
             String finalString;
+            String mission = "LORC";
             String Identity;
 
             // TODO Auto-generated method stub
@@ -219,9 +220,8 @@ class Client_S_Login extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "0";
-                        finalString = Identity + "/" + role + "/" + SID + "/" + PW;
+                        finalString = mission + "/" + Identity + "/" + role + "/" + SID + "/" + PW;
                         dataOutputStream.writeUTF(finalString);
-                        new Dial(1);
                     } catch (Exception e0) {
                         // TODO: handle exception
 
@@ -329,6 +329,7 @@ class Client_S_Create extends JFrame {
             String Major;
             String role;
             String finalString;
+            String mission = "LORC";
             String Identity;
 
             if (e.getSource() == b1) {
@@ -347,9 +348,9 @@ class Client_S_Create extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "1";
-                        finalString = Identity + "/" + role + "/" + SID + "/" + PW + "/" + Name + "/" + Major;
+                        finalString = mission + "/" + Identity + "/" + role + "/" + SID + "/" + PW + "/" + Name + "/"
+                                + Major;
                         dataOutputStream.writeUTF(finalString);
-                        new Dial(1);
                     } catch (Exception e0) {
                         // TODO: handle exception
 
@@ -359,7 +360,7 @@ class Client_S_Create extends JFrame {
             }
             if (e.getSource() == b2)
                 dispose();
-                new LOGIN_SP();
+            new LOGIN_SP();
         }
     }
 }
@@ -411,7 +412,7 @@ class Client_P_Login extends JFrame {
         add(idPanel);
         add(paPanel);
         add(loginPanel);
-        
+
         la2.setPreferredSize(new Dimension(168, 36));
         la3.setPreferredSize(new Dimension(168, 36));
         id.setPreferredSize(new Dimension(168, 36));
@@ -429,13 +430,14 @@ class Client_P_Login extends JFrame {
         String PID;
         String PPW;
         String role;
+        String mission = "LORC";
         String finalString;
         String Identity;
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == b3) {
-            	dispose();
-            	new LOGIN_SP();
+                dispose();
+                new LOGIN_SP();
             }
             if (e.getSource() == b2) {
                 PID = id.getText();
@@ -451,9 +453,8 @@ class Client_P_Login extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "0";
-                        finalString = Identity + "/" + role + "/" + PID + "/" + PPW;
+                        finalString = mission + "/" + Identity + "/" + role + "/" + PID + "/" + PPW;
                         dataOutputStream.writeUTF(finalString);
-                        new Dial(1);
                     } catch (Exception e0) {
 
                     }
@@ -521,6 +522,7 @@ class Client_P_Create extends JFrame {
         String PMaj;
         String role;
         String Identity;
+        String mission = "LORC";
         String finalString;
 
         public void actionPerformed(ActionEvent T) {
@@ -544,9 +546,9 @@ class Client_P_Create extends JFrame {
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
                         role = "1";
-                        finalString = Identity + "/" + role + "/" + PID + "/" + PPW + "/" + PName + "/" + PMaj;
+                        finalString = mission + "/" + Identity + "/" + role + "/" + PID + "/" + PPW + "/" + PName + "/"
+                                + PMaj;
                         dataOutputStream.writeUTF(finalString);
-                        new Dial(1);
                     } catch (Exception e) {
 
                     }
