@@ -1,6 +1,14 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 
 public class Server {
     ServerSocket ss = null;
@@ -75,3 +83,92 @@ class Login extends Thread {
     }
 }
 
+public class FileReceive {
+	 public static final int DEFAULT_BUFFER_SIZE = 10000;
+	    public static void main(String[] args) {
+	        int port =  Integer.parseInt("8484");  
+	        String filename = args[1];              
+	         
+	        try {
+	            ServerSocket server = new ServerSocket(port);
+	            Socket socket = server.accept();  
+	            InetSocketAddress ISA = (InetSocketAddress) socket.getRemoteSocketAddress();
+	             
+	            System.out.println("A client("+ ISA .getAddress().getHostAddress()+
+	                    " is connected. (Port: " + ISA .getPort() + ")");
+	             
+	            FileOutputStream fos = new FileOutputStream(filename);
+	            InputStream is = socket.getInputStream();
+	             
+	            double startTime = System.currentTimeMillis(); 
+	            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+	            int readBytes;
+	            while ((readBytes = is.read(buffer)) != -1) {
+	                fos.write(buffer, 0, readBytes);
+	 
+	            }      
+	            double Timeend = System.currentTimeMillis();
+	            double diffTime = (Timeend - startTime)/ 1000;;
+	 
+	            System.out.println("time: " + diffTime+ " second(s)");
+	             
+	            is.close();
+	            fos.close();
+	            socket.close();
+	            server.close();
+	        } catch (IOException e) {
+	           
+	            e.printStackTrace();
+	        }
+	    }
+}
+
+public class FileSend {
+    public static final int DEFAULT_BUFFER_SIZE = 10000;
+
+    public static void main(String[] args) {
+        String serverIP = "VioletOokamiScythe.iptime.org";
+        int port = Integer.parseInt("8484");
+        String FileName = "text.txt";
+
+        File file = new File(FileName);
+        if (!file.exists()) {
+            System.out.println("File not Exist.");
+            System.exit(0);
+        }
+
+        long fileSize = file.length();
+        long totalReadBytes = 0;
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        int readBytes;
+        double startTime = 0;
+
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            Socket socket = new Socket(serverIP, port);
+            if (!socket.isConnected()) {
+
+                System.exit(0);
+            }
+
+            startTime = System.currentTimeMillis();
+            OutputStream os = socket.getOutputStream();
+            while ((readBytes = fis.read(buffer)) > 0) {
+                os.write(buffer, 0, readBytes);
+                totalReadBytes += readBytes;
+                System.out.println("In progress: " + totalReadBytes + "/" + fileSize + " Byte(s) ("
+                        + (totalReadBytes * 100 / fileSize) + " %)");
+            }
+
+            System.out.println("전송 완료");
+            fis.close();
+            os.close();
+            socket.close();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
