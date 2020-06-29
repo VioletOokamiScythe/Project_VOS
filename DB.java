@@ -13,19 +13,17 @@ public class DB {
 	static String Room;
 	static String Time;
 
-	public ResultSet student(String role, String id, String PW, String Name, String Major) {
-		if (role.contentEquals("0"))
-			SQLEXECUTER = "select from Client_S_INFO_TABLE WHERE id=" + id;
-		else if (role.contentEquals("1"))
-			SQLEXECUTER = "insert into Client_S_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
-					+ "')";
-		else if (role.contentEquals("2"))
-			SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE ID='" + id + "'";
+	public ResultSet student_Login(String id, String PW) {
+		return rs;
+	}
 
+	public void Student_Create(String id, String PW, String Name, String Major) {
+		SQLEXECUTER = "insert into Client_S_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
+				+ "')";
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 		try {
@@ -33,11 +31,9 @@ public class DB {
 			Statement stmt = con.createStatement();
 			System.out.println("Successful connection to SQL Server.");
 			stmt.executeUpdate(SQLEXECUTER);
-			if (role.contentEquals("1")) {
-				SQLEXECUTER = "CREATE TABLE [" + id
-						+ "](EXAMCODE char(6) NOT NULL,EXAMROOM nvarchar(MAX) NOT NULL, EXAMTIME datetime2(0) NOT NULL)";
-				stmt.executeUpdate(SQLEXECUTER);
-			}
+			SQLEXECUTER = "CREATE TABLE [" + id
+					+ "](EXAMCODE char(6) NOT NULL,EXAMROOM nvarchar(MAX) NOT NULL, EXAMTIME datetime2(0) NOT NULL)";
+			stmt.executeUpdate(SQLEXECUTER);
 			new Dial(1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,24 +41,44 @@ public class DB {
 
 			// TODO: handle exception
 		}
-		return rs;
 	}
 
-	public ResultSet professor(String role, String id, String PW, String Name, String Major) {
-		if (role.contentEquals("0"))
-			SQLEXECUTER = "select from Client_P_INFO_TABLE WHERE id='" + id + "'";
-
-		else if (role.contentEquals("1"))
-			SQLEXECUTER = "insert into Client_P_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
-					+ "')";
-		else if (role.contentEquals("2"))
-			SQLEXECUTER = "delete from Client_P_INFO_TABLE WHERE ID='" + id + "'";
+	public void Student_Remove(String id){
+		SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE ID='" + id + "'";
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			SQLEXECUTER = "DROP TABLE [" + id + "]";
+			stmt.executeUpdate(SQLEXECUTER);
+			new Dial(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
 
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			// TODO: handle exception
+		}
+	}
+
+	public ResultSet Professor_Login(String id, String PW) {
+		return rs;
+	}
+
+	public void Professor_Create(String id, String PW, String Name, String Major) {
+		SQLEXECUTER = "insert into Client_P_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
+				+ "')";
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
 		try {
@@ -70,12 +86,9 @@ public class DB {
 			Statement stmt = con.createStatement();
 			System.out.println("Successful connection to SQL Server.");
 			stmt.executeUpdate(SQLEXECUTER);
-
-			if (role.contentEquals("1")) {
-				SQLEXECUTER = "CREATE TABLE [" + id
-						+ "](SUBJECTCODE char(10) NOT NULL PRIMARY KEY,EXAMCODE char(6) NOT NULL,EXAMROOM nvarchar(MAX) NOT NULL, EXAMTIME datetime2(0) NOT NULL)";
-				stmt.executeUpdate(SQLEXECUTER);
-			}
+			SQLEXECUTER = "CREATE TABLE [" + id
+					+ "](EXAMCODE char(6) NOT NULL,EXAMROOM nvarchar(MAX) NOT NULL, EXAMTIME datetime2(0) NOT NULL)";
+			stmt.executeUpdate(SQLEXECUTER);
 			new Dial(1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +96,31 @@ public class DB {
 
 			// TODO: handle exception
 		}
-		return rs;
+	}
+
+	public void Professor_Remove(String id){
+		SQLEXECUTER = "delete from Client_P_INFO_TABLE WHERE ID='" + id + "'";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			SQLEXECUTER = "DROP TABLE [" + id + "]";
+			stmt.executeUpdate(SQLEXECUTER);
+			new Dial(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
 	}
 
 	public ResultSet Check_EC_Duplicate(String ExamCode) {
@@ -247,4 +284,80 @@ public class DB {
 			// TODO: handle exception
 		}
 	}
+
+	public void Save(String Student_ID, String ExamCode, String SubjectName, String ExanRoom, String ExamTime) {
+		SQLEXECUTER = "insert into [" + Student_ID + "]values('" + ExamCode + "','" + SubjectName + "','" + ExanRoom
+				+ "','" + ExamTime + "')";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
+	}
+
+	public void Rename_Table(String ID, String NID) {
+		SQLEXECUTER = "SP_RENAME [" + ID + "],[" + NID + "]";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "Student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
+	}
+
+	public void Modify(String ID, String PW, String Name, String Major, String NID, String NPW, String NName,
+			String NMajor) {
+		SQLEXECUTER = "UPDATE Client_S_INFO_TABLE SET Student ID=" + NID + ",PW=" + NPW + ",NAME=" + NName + "Major"
+				+ NMajor + "SELECT from " + ID;
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "Student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
+	}
+
 }

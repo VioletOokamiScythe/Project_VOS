@@ -200,16 +200,13 @@ class Client_S_Login extends JFrame {
 
             String SID;
             String PW;
-            String role;
             String finalString;
-            String mission = "LORC";
-            String Identity;
+            String mission = "SLogin";
 
             // TODO Auto-generated method stub
             if (e.getSource() == b1) {
                 SID = t1.getText();
                 PW = t2.getText();
-                Identity = "Student";
 
                 if (!(SID.equals("")) && !(PW.equals(""))) {
                     Socket s = null;
@@ -219,8 +216,7 @@ class Client_S_Login extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        role = "0";
-                        finalString = mission + "/" + Identity + "/" + role + "/" + SID + "/" + PW;
+                        finalString = mission + "/" + SID + "/" + PW;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e0) {
                         // TODO: handle exception
@@ -327,17 +323,14 @@ class Client_S_Create extends JFrame {
             String PW;
             String Name;
             String Major;
-            String role;
             String finalString;
-            String mission = "LORC";
-            String Identity;
+            String mission = "SRegist";
 
             if (e.getSource() == b1) {
                 SID = t1.getText();
                 PW = t2.getText();
                 Name = t3.getText();
                 Major = t4.getText();
-                Identity = "Student";
 
                 if (!(SID.equals("")) && !(PW.equals("")) && !Name.equals("") && !Major.equals("")) {
                     Socket s = null;
@@ -347,8 +340,7 @@ class Client_S_Create extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        role = "1";
-                        finalString = mission + "/" + Identity + "/" + role + "/" + SID + "/" + PW + "/" + Name + "/"
+                        finalString = mission + "/" + SID + "/" + PW + "/" + Name + "/"
                                 + Major;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e0) {
@@ -429,10 +421,8 @@ class Client_P_Login extends JFrame {
     class P_Login_Action implements ActionListener {
         String PID;
         String PPW;
-        String role;
-        String mission = "LORC";
+        String mission = "PLogin";
         String finalString;
-        String Identity;
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == b3) {
@@ -442,7 +432,6 @@ class Client_P_Login extends JFrame {
             if (e.getSource() == b2) {
                 PID = id.getText();
                 PPW = passwd.getText();
-                Identity = "Professor";
 
                 if (!(PID.equals("")) && !(PPW.equals(""))) {
                     Socket s = null;
@@ -452,8 +441,7 @@ class Client_P_Login extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        role = "0";
-                        finalString = mission + "/" + Identity + "/" + role + "/" + PID + "/" + PPW;
+                        finalString = mission + "/" + PID + "/" + PPW;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e0) {
 
@@ -520,9 +508,7 @@ class Client_P_Create extends JFrame {
         String PPW;
         String PName;
         String PMaj;
-        String role;
-        String Identity;
-        String mission = "LORC";
+        String mission = "PRegist";
         String finalString;
 
         public void actionPerformed(ActionEvent T) {
@@ -535,7 +521,6 @@ class Client_P_Create extends JFrame {
                 PPW = t2.getText();
                 PName = t3.getText();
                 PMaj = t4.getText();
-                Identity = "Professor";
 
                 if (!(PID.equals("")) && !(PPW.equals("")) && !(PName.equals("")) && !(PMaj.equals(""))) {
                     Socket s = null;
@@ -545,9 +530,7 @@ class Client_P_Create extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        role = "1";
-                        finalString = mission + "/" + Identity + "/" + role + "/" + PID + "/" + PPW + "/" + PName + "/"
-                                + PMaj;
+                        finalString = mission + "/" + PID + "/" + PPW + "/" + PName + "/" + PMaj;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e) {
 

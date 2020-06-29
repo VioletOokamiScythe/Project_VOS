@@ -42,6 +42,7 @@ class Login extends Thread {
     String Code;
     String Room;
     String Time;
+
     DB DB = new DB();
 
     Login(Socket _s) {
@@ -61,11 +62,28 @@ class Login extends Thread {
                 StringTokenizer st = new StringTokenizer(User, "/");
                 String mission = st.nextToken();
                 switch (mission) {
-                    case "LORC":
-                        LoginORCreate(st);
+                    case "SLogin":
+                        SLogin(st);
                         break;
 
-                    case "Delete":
+                    case "SRegist":
+                        SRegist(st);
+                        break;
+
+                    case "SSecession":
+                        SSecession(st);
+                        break;
+
+                    case "PLogin":
+                        PLogin(st);
+                        break;
+
+                    case "PRegist":
+                        PRegist(st);
+                        break;
+
+                    case "PSecession":
+                        PSecession(st);
                         break;
 
                     case "Check":
@@ -77,7 +95,11 @@ class Login extends Thread {
                         break;
 
                     case "Drop":
-                        CreateE(st);
+                        DropE(st);
+                        break;
+
+                    case "Modify":
+                        ModifyINFO(st);
                         break;
 
                     default:
@@ -89,46 +111,55 @@ class Login extends Thread {
         }
     }
 
-    void LoginORCreate(StringTokenizer st) {
-        Identity = st.nextToken();
-        role = st.nextToken();
+    void SLogin(StringTokenizer st) {
         ID = st.nextToken();
         PW = st.nextToken();
 
-        switch (role) {
-            case "0":
-                Name = "";
-                Major = "";
-                if (Identity.contentEquals("Student"))
-                    DB.student(role, ID, PW, Name, Major);
-                else if (Identity.contentEquals("Professor"))
-                    DB.professor(role, ID, PW, Name, Major);
-                break;
+        ResultSet rs;
 
-            case "1":
-                Name = st.nextToken();
-                Major = st.nextToken();
-                if (Identity.contentEquals("Student"))
-                    DB.student(role, ID, PW, Name, Major);
-                else if (Identity.contentEquals("Professor"))
-                    DB.professor(role, ID, PW, Name, Major);
-                break;
+        rs = DB.student_Login(ID, PW);
+    }
 
-            case "2":
-                Name = "";
-                Major = "";
-                if (Identity.contentEquals("Student"))
-                    DB.student(role, ID, PW, Name, Major);
-                else if (Identity.contentEquals("Professor"))
-                    DB.professor(role, ID, PW, Name, Major);
-                break;
-            default:
-                break;
-        }
+    void SRegist(StringTokenizer st) {
+        ID = st.nextToken();
+        PW = st.nextToken();
+        Name = st.nextToken();
+        Major = st.nextToken();
+
+        DB.Student_Create(ID, PW, Name, Major);
+    }
+
+    void SSecession(StringTokenizer st) {
+        ID = st.nextToken();
+
+        DB.Student_Remove(ID);
+    }
+
+    void PLogin(StringTokenizer st) {
+        ID = st.nextToken();
+        PW = st.nextToken();
+
+        ResultSet rs;
+
+        rs = DB.Professor_Login(ID, PW);
+    }
+
+    void PRegist(StringTokenizer st) {
+        ID = st.nextToken();
+        PW = st.nextToken();
+        Name = st.nextToken();
+        Major = st.nextToken();
+
+        DB.Professor_Create(ID, PW, Name, Major);
+    }
+
+    void PSecession(StringTokenizer st) {
+        ID = st.nextToken();
+
+        DB.Professor_Remove(ID);
     }
 
     void Check_TC(StringTokenizer st) {
-        role = st.nextToken();
         String ExamCode = st.nextToken();
 
         ResultSet Result;
@@ -192,5 +223,15 @@ class Login extends Thread {
     void DropE(StringTokenizer st) {
         String ExamCode = st.nextToken();
         DB.Drop(ExamCode);
+    }
+
+    void ModifyINFO(StringTokenizer st) {
+        String NID = st.nextToken();
+        String NPW = st.nextToken();
+        String NName = st.nextToken();
+        String NMajor = st.nextToken();
+
+        DB.Modify(ID, PW, Name, Major, NID, NPW, NName, NMajor);
+        DB.Rename_Table(ID, NID);
     }
 }

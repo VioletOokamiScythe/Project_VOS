@@ -18,10 +18,10 @@ public class Dial extends JFrame {
                     Sign = 1;
                     break;
                case 2:
-                    int c = JOptionPane.showConfirmDialog(null, "정말로 이 시험을 삭제합니까?\n실행하면 다시 되돌릴 수 없습니다.", "경고",
+                    int c = JOptionPane.showConfirmDialog(null, "관련된 모든 정보가 삭제되며, 실행하면 다시 되돌릴 수 없습니다.\n삭제합니까?", "경고",
                               JOptionPane.YES_NO_OPTION);
                     if (c == 0)
-                         JOptionPane.showInputDialog(null, "자동 삭제 방지를 위해 시험 코드를 입력하세요.", "안내",
+                         JOptionPane.showInputDialog(null, "자동 삭제 방지를 위해 한번 더 입력하세요.", "안내",
                                    JOptionPane.QUESTION_MESSAGE);
                     break;
                case 3:
