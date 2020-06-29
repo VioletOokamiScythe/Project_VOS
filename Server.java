@@ -98,8 +98,12 @@ class Login extends Thread {
                         DropE(st);
                         break;
 
-                    case "Modify":
-                        ModifyINFO(st);
+                    case "SModify":
+                        SModifyINFO(st);
+                        break;
+
+                        case "PModify":
+                        PModifyINFO(st);
                         break;
 
                     default:
@@ -175,6 +179,7 @@ class Login extends Thread {
                     dataOutStream.writeInt(0);
                 } catch (Exception e) {
                     // TODO: handle exception
+                    e.printStackTrace();
                 }
 
             }
@@ -202,6 +207,7 @@ class Login extends Thread {
                     dataOutStream.writeInt(0);
                 } catch (Exception e) {
                     // TODO: handle exception
+                    e.printStackTrace();
                 }
 
             }
@@ -225,7 +231,25 @@ class Login extends Thread {
         DB.Drop(ExamCode);
     }
 
-    void ModifyINFO(StringTokenizer st) {
+    void SModifyINFO(StringTokenizer st) {
+        ID = st.nextToken();
+        PW = st.nextToken();
+        Name = st.nextToken();
+        Major = st.nextToken();
+        String NID = st.nextToken();
+        String NPW = st.nextToken();
+        String NName = st.nextToken();
+        String NMajor = st.nextToken();
+
+        DB.Modify(ID, PW, Name, Major, NID, NPW, NName, NMajor);
+        DB.Rename_Table(ID, NID);
+    }
+    
+    void PModifyINFO(StringTokenizer st) {
+        ID = st.nextToken();
+        PW = st.nextToken();
+        Name = st.nextToken();
+        Major = st.nextToken();
         String NID = st.nextToken();
         String NPW = st.nextToken();
         String NName = st.nextToken();

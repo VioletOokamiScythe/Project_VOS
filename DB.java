@@ -44,7 +44,7 @@ public class DB {
 	}
 
 	public void Student_Remove(String id){
-		SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE ID='" + id + "'";
+		SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE [Student ID]='" + id + "'";
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -53,7 +53,7 @@ public class DB {
 			e.printStackTrace();
 		}
 		try {
-			Connection con = DriverManager.getConnection(URL, "student", "1111");
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
 			Statement stmt = con.createStatement();
 			System.out.println("Successful connection to SQL Server.");
 			stmt.executeUpdate(SQLEXECUTER);
@@ -336,8 +336,8 @@ public class DB {
 
 	public void Modify(String ID, String PW, String Name, String Major, String NID, String NPW, String NName,
 			String NMajor) {
-		SQLEXECUTER = "UPDATE Client_S_INFO_TABLE SET Student ID=" + NID + ",PW=" + NPW + ",NAME=" + NName + "Major"
-				+ NMajor + "SELECT from " + ID;
+		SQLEXECUTER = "UPDATE Client_S_INFO_TABLE SET [Student ID] = '" + NID + "',PW='" + NPW + "',NAME='" + NName + "',Major='"
+				+ NMajor + "' Where [Student ID] = " + ID+"";
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

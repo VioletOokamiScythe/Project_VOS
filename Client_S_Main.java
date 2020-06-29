@@ -136,7 +136,7 @@ public class Client_S_Main extends JFrame {
 
             }
             if (e.getSource() == Config) {
-                new Configuration();
+                new SConfiguration();
             }
         }
 
@@ -146,12 +146,11 @@ public class Client_S_Main extends JFrame {
 
     public static void main(String[] args) {
         Client_S_Main CSM = new Client_S_Main();
-        new Configuration();
     }
 
 }
 
-class Configuration extends JFrame {
+class SConfiguration extends JFrame {
 
     JPanel basePanel = new JPanel(new BorderLayout(9, 9));
     JPanel centerPanel = new JPanel(new FlowLayout());
@@ -177,7 +176,7 @@ class Configuration extends JFrame {
     JButton Modify = new JButton("수정");
     JButton Delete = new JButton("탈퇴");
 
-    Configuration() {
+    SConfiguration() {
 
         // 기본 설정
         setSize(450, 392);
@@ -238,7 +237,6 @@ class Configuration extends JFrame {
         String Name;
         String Major;
         String finalString;
-        String Identity = "Student";
         String NID;
         String NPW;
         String NName;
@@ -249,7 +247,7 @@ class Configuration extends JFrame {
             // TODO Auto-generated method stub
             if (e.getSource() == Modify) {
 
-                String mission = "Modify";
+                String mission = "SModify";
                 ID = iDField.getText();
                 PW = passwordField.getText();
                 Name = nameField.getText();
@@ -276,8 +274,7 @@ class Configuration extends JFrame {
                 }
             }
             if (e.getSource() == Delete) {
-                String mission = "LORC";
-                String role = "2";
+                String mission = "SSecession";
                 ID = iDField.getText();
 
                 if (!(ID.equals(""))) {
@@ -288,7 +285,7 @@ class Configuration extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        finalString = mission + "/" + Identity + "/" + role + "/" + ID;
+                        finalString = mission + "/" + ID;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e2) {
                         e2.printStackTrace();
