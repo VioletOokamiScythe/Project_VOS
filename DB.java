@@ -310,6 +310,54 @@ public class DB {
 		}
 	}
 
+	public void SRemove(String Student_ID,String ExamCode){
+		SQLEXECUTER = "DELETE [" + ExamCode + "] where [" + Student_ID + "]";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
+	}
+
+	public void PRemove(String Professor_ID,String ExamCode){
+		SQLEXECUTER = "DELETE [" + ExamCode + "] where [" + Professor_ID + "]";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception
+		}
+	}
+	
 	public void Rename_Table(String ID, String NID) {
 		SQLEXECUTER = "SP_RENAME [" + ID + "],[" + NID + "]";
 

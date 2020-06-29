@@ -94,16 +94,28 @@ class Login extends Thread {
                         CreateE(st);
                         break;
 
-                    case "Drop":
+                        case "Drop":
                         DropE(st);
+                        break;
+
+                        case "SDrop":
+                        SDrop(st);
                         break;
 
                     case "SModify":
                         SModifyINFO(st);
                         break;
 
-                        case "PModify":
+                    case "PModify":
                         PModifyINFO(st);
+                        break;
+
+                        case "SSave":
+                        SSave(st);
+                        break;
+
+                    case "PSave":
+                    PSave(st);
                         break;
 
                     default:
@@ -115,7 +127,7 @@ class Login extends Thread {
         }
     }
 
-    void SLogin(StringTokenizer st) {
+    void SLogin(StringTokenizer st) {// 학생 로그인
         ID = st.nextToken();
         PW = st.nextToken();
 
@@ -124,7 +136,7 @@ class Login extends Thread {
         rs = DB.student_Login(ID, PW);
     }
 
-    void SRegist(StringTokenizer st) {
+    void SRegist(StringTokenizer st) {// 학생 가입
         ID = st.nextToken();
         PW = st.nextToken();
         Name = st.nextToken();
@@ -133,13 +145,13 @@ class Login extends Thread {
         DB.Student_Create(ID, PW, Name, Major);
     }
 
-    void SSecession(StringTokenizer st) {
+    void SSecession(StringTokenizer st) {// 학생 탈퇴
         ID = st.nextToken();
 
         DB.Student_Remove(ID);
     }
 
-    void PLogin(StringTokenizer st) {
+    void PLogin(StringTokenizer st) {// 교수 로그인
         ID = st.nextToken();
         PW = st.nextToken();
 
@@ -148,7 +160,7 @@ class Login extends Thread {
         rs = DB.Professor_Login(ID, PW);
     }
 
-    void PRegist(StringTokenizer st) {
+    void PRegist(StringTokenizer st) {// 교수 가입
         ID = st.nextToken();
         PW = st.nextToken();
         Name = st.nextToken();
@@ -157,13 +169,13 @@ class Login extends Thread {
         DB.Professor_Create(ID, PW, Name, Major);
     }
 
-    void PSecession(StringTokenizer st) {
+    void PSecession(StringTokenizer st) {// 교수 탈퇴
         ID = st.nextToken();
 
         DB.Professor_Remove(ID);
     }
 
-    void Check_TC(StringTokenizer st) {
+    void Check_TC(StringTokenizer st) {//시험 코드 검사
         String ExamCode = st.nextToken();
 
         ResultSet Result;
@@ -190,7 +202,7 @@ class Login extends Thread {
 
     }
 
-    void Check_EI(StringTokenizer st) {
+    void Check_EI(StringTokenizer st) {//시험 장소 시간 검사
         String ExamRoom = st.nextToken();
         String ExamTime = st.nextToken();
 
@@ -217,7 +229,7 @@ class Login extends Thread {
         }
     }
 
-    void CreateE(StringTokenizer st) {
+    void CreateE(StringTokenizer st) {// 시험 생성
         String ExamCode = st.nextToken();
         String Host_IP = st.nextToken();
         String ExamRoom = st.nextToken();
@@ -226,12 +238,12 @@ class Login extends Thread {
         DB.CreateEXAM(ExamCode, Host_IP, ExamRoom, ExamTime);
     }
 
-    void DropE(StringTokenizer st) {
+    void DropE(StringTokenizer st) {//시험 삭제 (시험 자체 테이블 및 EXAM_INFO 테이블)
         String ExamCode = st.nextToken();
         DB.Drop(ExamCode);
     }
 
-    void SModifyINFO(StringTokenizer st) {
+    void SModifyINFO(StringTokenizer st) {// 학생정보 수정
         ID = st.nextToken();
         PW = st.nextToken();
         Name = st.nextToken();
@@ -244,8 +256,8 @@ class Login extends Thread {
         DB.Modify(ID, PW, Name, Major, NID, NPW, NName, NMajor);
         DB.Rename_Table(ID, NID);
     }
-    
-    void PModifyINFO(StringTokenizer st) {
+
+    void PModifyINFO(StringTokenizer st) {// 교수정보 수정
         ID = st.nextToken();
         PW = st.nextToken();
         Name = st.nextToken();
@@ -257,5 +269,27 @@ class Login extends Thread {
 
         DB.Modify(ID, PW, Name, Major, NID, NPW, NName, NMajor);
         DB.Rename_Table(ID, NID);
+    }
+
+    void SDrop(StringTokenizer st){//시험 삭제(학생 개인 테이블)
+        String Student_ID = st.nextToken();
+        String ExamCode = st.nextToken();
+
+        DB.SRemove(Student_ID, ExamCode);
+    }
+
+    void PDrop(StringTokenizer st){//시험 삭제(교수 개인 테이블)
+        String Professor_ID = st.nextToken();
+        String ExamCode = st.nextToken();
+
+        DB.PRemove(Professor_ID, ExamCode);
+    }
+
+    void SSave(StringTokenizer st){
+
+    }
+
+    void PSave(StringTokenizer st){
+        
     }
 }

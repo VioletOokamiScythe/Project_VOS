@@ -133,7 +133,7 @@ public class Client_S_Main extends JFrame {
                 new Client_S_Save();
             }
             if (e.getSource() == ModifyButton) {
-
+                new SModify();
             }
             if (e.getSource() == Config) {
                 new SConfiguration();
@@ -266,7 +266,8 @@ class SConfiguration extends JFrame {
                         s = new Socket("VioletOokamiScythe.iptime.org", 5656);
                         outStream = s.getOutputStream();
                         dataOutputStream = new DataOutputStream(outStream);
-                        finalString = mission + "/" + ID + "/" + PW + "/" + Name + "/" + Major+ "/" + NID + "/" + NPW + "/" + NName + "/" + NMajor;
+                        finalString = mission + "/" + ID + "/" + PW + "/" + Name + "/" + Major + "/" + NID + "/" + NPW
+                                + "/" + NName + "/" + NMajor;
                         dataOutputStream.writeUTF(finalString);
                     } catch (Exception e2) {
                         e2.printStackTrace();
@@ -297,4 +298,326 @@ class SConfiguration extends JFrame {
     }
 
     Configuration_Action CA = new Configuration_Action();
+}
+
+class Client_S_Save extends JFrame {
+
+    // 월 일 시 분 문자열
+    String Year = "2020";
+    String[] Month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+    String[] Date = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+    String[] HOUR = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+            "18", "19", "20", "21", "22", "23" };
+    String[] MIN = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+            "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35",
+            "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53",
+            "54", "55", "56", "57", "58", "59" };
+    String[] PLACE = { "436호", "407호", "409호", "410호" };
+
+    // 패널 생성
+    JPanel basePanel = new JPanel(new BorderLayout());
+    JPanel northPanel = new JPanel(new FlowLayout());
+    JPanel centerPanel = new JPanel(new FlowLayout());
+    JPanel southPanel = new JPanel(new FlowLayout());
+
+    // 컴포넌트 생성
+    JLabel titleLabel = new JLabel("VOS - Very Objective System");
+    JLabel ExamCode = new JLabel("EXAM CODE");
+    JTextField ExamCodeField = new JTextField();
+    JLabel SubjectName = new JLabel("SUBJECT NAME");
+    JTextField SubjectNameField = new JTextField();
+    JLabel ExamTime = new JLabel("EXAM TIME");
+    JComboBox<String> ExamTimeMONTH = new JComboBox<String>();
+    JLabel ExamTimeMONTHLabel = new JLabel("월");
+    JComboBox<String> ExamTimeDATE = new JComboBox<String>();
+    JLabel ExamTimeDATELabel = new JLabel("일");
+    JComboBox<String> ExamTimeHOUR = new JComboBox<String>();
+    JLabel ExamTimeHourLabel = new JLabel("시");
+    JComboBox<String> ExamTimeMINUTE = new JComboBox<String>();
+    JLabel ExamTimeMINUTELabel = new JLabel("분 시작");
+    JLabel Place = new JLabel("장소");
+    JComboBox<String> ExamRoom = new JComboBox<String>();
+    JLabel ExamRoomLable = new JLabel("호");
+
+    JButton SaveButton = new JButton("저장");
+
+    Client_S_Save() {
+        // 기본설정
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("VOS - Client_S_Save");
+        setSize(450, 392);
+        setVisible(true);
+        setContentPane(basePanel);
+
+        class Listener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getSource() == SaveButton) {
+
+                    try {
+                        Socket s = null;
+                        OutputStream outStream;
+                        DataOutputStream dataOutputStream;
+                        String finalString;
+                        String Mission = "SSave";
+
+                        try {
+                            s = new Socket("violetookamiscythe.iptime.org", 5656);
+                            outStream = s.getOutputStream();
+                            dataOutputStream = new DataOutputStream(outStream);
+                            finalString = Mission + "/" + ExamCodeField.getText() + "/" + SubjectNameField.getText()
+                                    + "/" + Year + "-" + ExamTimeMONTH.getSelectedItem().toString() + "-"
+                                    + ExamTimeDATE.getSelectedItem().toString() + " "
+                                    + ExamTimeHOUR.getSelectedItem().toString() + ":"
+                                    + ExamTimeMINUTE.getSelectedItem().toString() + ":" + "00" + "." + "0";
+                            dataOutputStream.writeUTF(finalString);
+                        } catch (Exception e0) {
+                            // TODO: handle exception
+                            e0.printStackTrace();
+                        }
+                    } catch (Exception e0) {
+                        // TODO: handle exception
+                    }
+                }
+            }
+        }
+
+        // 컴포넌트 설정
+        basePanel.add(northPanel, BorderLayout.NORTH);
+        basePanel.add(centerPanel, BorderLayout.CENTER);
+        basePanel.add(southPanel, BorderLayout.SOUTH);
+
+        northPanel.add(titleLabel);
+        centerPanel.add(ExamCode);
+        centerPanel.add(ExamCodeField);
+        centerPanel.add(SubjectName);
+        centerPanel.add(SubjectNameField);
+        centerPanel.add(ExamTime);
+        centerPanel.add(ExamTimeMONTH);
+        centerPanel.add(ExamTimeMONTHLabel);
+        centerPanel.add(ExamTimeDATE);
+        centerPanel.add(ExamTimeDATELabel);
+        centerPanel.add(ExamTimeHOUR);
+        centerPanel.add(ExamTimeHourLabel);
+        centerPanel.add(ExamTimeMINUTE);
+        centerPanel.add(ExamTimeMINUTELabel);
+        centerPanel.add(Place);
+        centerPanel.add(ExamRoom);
+        centerPanel.add(ExamRoomLable);
+
+        southPanel.add(SaveButton);
+
+        titleLabel.setPreferredSize(new Dimension(168, 28));
+        ExamCode.setPreferredSize(new Dimension(168, 28));
+        ExamCodeField.setPreferredSize(new Dimension(168, 28));
+        SubjectName.setPreferredSize(new Dimension(168, 28));
+        SubjectNameField.setPreferredSize(new Dimension(168, 28));
+        ExamTime.setPreferredSize(new Dimension(450, 28));
+        ExamTimeMONTH.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMONTHLabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeDATE.setPreferredSize(new Dimension(168, 28));
+        ExamTimeDATELabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeHOUR.setPreferredSize(new Dimension(168, 28));
+        ExamTimeHourLabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMINUTE.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMINUTELabel.setPreferredSize(new Dimension(168, 28));
+        Place.setPreferredSize(new Dimension(84, 28));
+        ExamRoom.setPreferredSize(new Dimension(112, 28));
+        ExamRoomLable.setPreferredSize(new Dimension(56, 28));
+
+        ExamTime.setHorizontalAlignment(JTextField.CENTER);
+
+        for (int i = 0; i < Month.length; i++) {
+            ExamTimeMONTH.addItem(Month[i]);
+        }
+        for (int i = 0; i < Date.length; i++) {
+            ExamTimeDATE.addItem(Date[i]);
+        }
+        for (int i = 0; i < HOUR.length; i++) {
+            ExamTimeHOUR.addItem(HOUR[i]);
+        }
+        for (int i = 0; i < MIN.length; i++) {
+            ExamTimeMINUTE.addItem(MIN[i]);
+        }
+        for (int i = 0; i < PLACE.length; i++) {
+            ExamRoom.addItem(PLACE[i]);
+        }
+    }
+
+}
+
+class SModify extends JFrame {
+
+    // 월 일 시 분 문자열
+    String Year = "2020";
+    String[] Month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+    String[] Date = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
+            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
+    String[] HOUR = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+            "18", "19", "20", "21", "22", "23" };
+    String[] MIN = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+            "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35",
+            "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53",
+            "54", "55", "56", "57", "58", "59" };
+    String[] PLACE = { "436호", "407호", "409호", "410호" };
+
+    // 패널 생성
+    JPanel basePanel = new JPanel(new BorderLayout());
+    JPanel northPanel = new JPanel(new FlowLayout());
+    JPanel centerPanel = new JPanel(new FlowLayout());
+    JPanel southPanel = new JPanel(new FlowLayout());
+
+    // 컴포넌트 생성
+    JLabel titleLabel = new JLabel("VOS - Very Objective System");
+    JLabel ExamCode = new JLabel("EXAM CODE");
+    JTextField ExamCodeField = new JTextField();
+    JLabel SubjectName = new JLabel("SUBJECT NAME");
+    JTextField SubjectNameField = new JTextField();
+    JLabel ExamTime = new JLabel("EXAM TIME");
+    JComboBox<String> ExamTimeMONTH = new JComboBox<String>();
+    JLabel ExamTimeMONTHLabel = new JLabel("월");
+    JComboBox<String> ExamTimeDATE = new JComboBox<String>();
+    JLabel ExamTimeDATELabel = new JLabel("일");
+    JComboBox<String> ExamTimeHOUR = new JComboBox<String>();
+    JLabel ExamTimeHourLabel = new JLabel("시");
+    JComboBox<String> ExamTimeMINUTE = new JComboBox<String>();
+    JLabel ExamTimeMINUTELabel = new JLabel("분 시작");
+    JLabel Place = new JLabel("장소");
+    JComboBox<String> ExamRoom = new JComboBox<String>();
+    JLabel ExamRoomLable = new JLabel("호");
+
+    JButton SaveButton = new JButton("저장");
+    JButton DeleteButton = new JButton("삭제");
+
+    SModify() {
+        // 기본설정
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("VOS - Client_S_Modify");
+        setSize(450, 392);
+        setVisible(true);
+        setContentPane(basePanel);
+
+        class Listener implements ActionListener {
+
+            String TestCode;
+            String finalString;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getSource() == SaveButton) {
+
+                    try {
+                        Socket s = null;
+                        OutputStream outStream;
+                        DataOutputStream dataOutputStream;
+                        
+                        String Mission = "STSave";
+
+                        try {
+                            s = new Socket("violetookamiscythe.iptime.org", 5656);
+                            outStream = s.getOutputStream();
+                            dataOutputStream = new DataOutputStream(outStream);
+                            finalString = Mission + "/" + ExamCodeField.getText() + "/" + SubjectNameField.getText()
+                                    + "/" + Year + "-" + ExamTimeMONTH.getSelectedItem().toString() + "-"
+                                    + ExamTimeDATE.getSelectedItem().toString() + " "
+                                    + ExamTimeHOUR.getSelectedItem().toString() + ":"
+                                    + ExamTimeMINUTE.getSelectedItem().toString() + ":" + "00" + "." + "0";
+                            dataOutputStream.writeUTF(finalString);
+                        } catch (Exception e0) {
+                            // TODO: handle exception
+                            e0.printStackTrace();
+                        }
+                    } catch (Exception e0) {
+                        // TODO: handle exception
+                    }
+                }
+                if (e.getSource()==DeleteButton) {
+                    String mission = "SDrop";
+                    TestCode = ExamCodeField.getText();
+                    String StudentID=new Dial(12).getCode();
+
+                if (!(ExamCodeField.equals(""))&&!(ExamCodeField.equals(""))) {
+                    Socket s = null;
+                    OutputStream outStream;
+                    DataOutputStream dataOutputStream;
+                    try {
+                        s = new Socket("VioletOokamiScythe.iptime.org", 5656);
+                        outStream = s.getOutputStream();
+                        dataOutputStream = new DataOutputStream(outStream);
+                        finalString = mission + "/" + StudentID+ "/" + TestCode;
+                        dataOutputStream.writeUTF(finalString);
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                }
+                }
+            }
+        }
+
+        // 컴포넌트 설정
+        basePanel.add(northPanel, BorderLayout.NORTH);
+        basePanel.add(centerPanel, BorderLayout.CENTER);
+        basePanel.add(southPanel, BorderLayout.SOUTH);
+
+        northPanel.add(titleLabel);
+        centerPanel.add(ExamCode);
+        centerPanel.add(ExamCodeField);
+        centerPanel.add(SubjectName);
+        centerPanel.add(SubjectNameField);
+        centerPanel.add(ExamTime);
+        centerPanel.add(ExamTimeMONTH);
+        centerPanel.add(ExamTimeMONTHLabel);
+        centerPanel.add(ExamTimeDATE);
+        centerPanel.add(ExamTimeDATELabel);
+        centerPanel.add(ExamTimeHOUR);
+        centerPanel.add(ExamTimeHourLabel);
+        centerPanel.add(ExamTimeMINUTE);
+        centerPanel.add(ExamTimeMINUTELabel);
+        centerPanel.add(Place);
+        centerPanel.add(ExamRoom);
+        centerPanel.add(ExamRoomLable);
+
+        southPanel.add(SaveButton);
+        southPanel.add(DeleteButton);
+
+        titleLabel.setPreferredSize(new Dimension(168, 28));
+        ExamCode.setPreferredSize(new Dimension(168, 28));
+        ExamCodeField.setPreferredSize(new Dimension(168, 28));
+        SubjectName.setPreferredSize(new Dimension(168, 28));
+        SubjectNameField.setPreferredSize(new Dimension(168, 28));
+        ExamTime.setPreferredSize(new Dimension(450, 28));
+        ExamTimeMONTH.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMONTHLabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeDATE.setPreferredSize(new Dimension(168, 28));
+        ExamTimeDATELabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeHOUR.setPreferredSize(new Dimension(168, 28));
+        ExamTimeHourLabel.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMINUTE.setPreferredSize(new Dimension(168, 28));
+        ExamTimeMINUTELabel.setPreferredSize(new Dimension(168, 28));
+        Place.setPreferredSize(new Dimension(84, 28));
+        ExamRoom.setPreferredSize(new Dimension(112, 28));
+        ExamRoomLable.setPreferredSize(new Dimension(56, 28));
+
+        DeleteButton.setBackground(Color.RED);
+
+        ExamTime.setHorizontalAlignment(JTextField.CENTER);
+
+        for (int i = 0; i < Month.length; i++) {
+            ExamTimeMONTH.addItem(Month[i]);
+        }
+        for (int i = 0; i < Date.length; i++) {
+            ExamTimeDATE.addItem(Date[i]);
+        }
+        for (int i = 0; i < HOUR.length; i++) {
+            ExamTimeHOUR.addItem(HOUR[i]);
+        }
+        for (int i = 0; i < MIN.length; i++) {
+            ExamTimeMINUTE.addItem(MIN[i]);
+        }
+        for (int i = 0; i < PLACE.length; i++) {
+            ExamRoom.addItem(PLACE[i]);
+        }
+    }
 }
