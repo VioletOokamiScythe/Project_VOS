@@ -9,14 +9,15 @@ public class Client_T extends JFrame {
     // MyListener ml = new MyListener();
 
     JFrame CTFrame = new JFrame();
-    JButton btnCam = new JButton("카메라 공간");
-    JButton btnSign = new JButton("신호 공간");
-    JButton btnAdd = new JButton("기능 추가 공간");
+    JButton btnCam = new JButton("카메라 공간");// 패널로 변경
+    JButton btnSign = new JButton("신호 공간");// 패널로 변경
+    JButton btnAdd = new JButton("기능 추가 공간");// 패널로 변경
 
     Client_T() {
         CTFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         CTFrame.setTitle("VOS - Client T");
-        CTFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        CTFrame.setSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width/2,Toolkit.getDefaultToolkit().getScreenSize().height-28));
+        CTFrame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2, 0);
         JPanel addField = new JPanel();
         CTFrame.getContentPane().add(btnCam, BorderLayout.CENTER);
         CTFrame.getContentPane().add(addField, BorderLayout.SOUTH);

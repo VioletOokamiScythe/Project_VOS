@@ -46,10 +46,23 @@ public class Client_P_Main extends JFrame {
 		// j3.setBounds(650, 780, 200, 30);
 
 		add(P);
+		
 
 		setSize(900, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+
+		class P_Main_Action implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource()==j1) {
+					new Client_P_Save();
+				}
+			}
+		}
+
+		P_Main_Action PMA=new P_Main_Action();
+
+		j1.addActionListener(PMA);
 	}
 
 	public static void main(String[] args) {
@@ -57,9 +70,5 @@ public class Client_P_Main extends JFrame {
 		Client_P_Main CPM = new Client_P_Main();
 	}
 
-	class P_Main_Action implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
+	
 }

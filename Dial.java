@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class Dial extends JFrame {
 
      String Code;
-     int Sign=9;
+     int Sign = 9;
 
      Dial(int i) {
           switch (i) {
@@ -51,9 +51,11 @@ public class Dial extends JFrame {
                     Sign = JOptionPane.showConfirmDialog(null, "예약 가능한 장소 및 시간입니다.\n이대로 진행하시겠습니까?", "안내",
                               JOptionPane.YES_NO_OPTION);
                     break;
-                    case 11:
+               case 11:
                     JOptionPane.showMessageDialog(null, "먼저 시험코드를 한번 검사하고 진행하세요.", "오류", JOptionPane.ERROR_MESSAGE);
                     break;
+               case 12:// 임시
+                    Code = JOptionPane.showInputDialog(null, "학번을 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
 
                default:
                     break;

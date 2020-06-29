@@ -50,7 +50,7 @@ public class DB {
 
 	public ResultSet professor(String role, String id, String PW, String Name, String Major) {
 		if (role.contentEquals("0"))
-			SQLEXECUTER = "select from Client_P_INFO_TABLE WHERE id='" + id+ "'";
+			SQLEXECUTER = "select from Client_P_INFO_TABLE WHERE id='" + id + "'";
 
 		else if (role.contentEquals("1"))
 			SQLEXECUTER = "insert into Client_P_INFO_TABLE values('" + id + "','" + PW + "','" + Name + "','" + Major
@@ -87,7 +87,7 @@ public class DB {
 	}
 
 	public ResultSet Check_EC_Duplicate(String ExamCode) {
-		SQLEXECUTER = "select from EXAM_INFO_TABLE WHERE EXAM_CODE = '" + ExamCode+ "'";
+		SQLEXECUTER = "select from EXAM_INFO_TABLE WHERE EXAM_CODE = '" + ExamCode + "'";
 		boolean confirm = false;
 
 		try {
@@ -120,7 +120,7 @@ public class DB {
 		return rs;
 	}
 
-	public static ResultSet Check_Duplicate(String ExamRoom, String ExamTime) {
+	public ResultSet Check_Duplicate(String ExamRoom, String ExamTime) {
 		SQLEXECUTER = "select from EXAM_INFO_TABLE WHERE EXAM_ROOM = " + ExamRoom + " AND EXAM_TIME" + ExamTime;
 		boolean confirm = false;
 
@@ -156,8 +156,9 @@ public class DB {
 		return rs;
 	}
 
-	public static void CreateEXAM(String ExamCode, String Host_IP, String ExamRoom, String ExamTime) {
-		SQLEXECUTER = "CREATE TABLE [" + ExamCode + "](EXAMCODE char(6) NOT NULL)";
+	public void CreateEXAM(String ExamCode, String Host_IP, String ExamRoom, String ExamTime) {
+		SQLEXECUTER = "CREATE TABLE [" + ExamCode
+				+ "](Student_Name nvarchar(MAX) NOT NULL,Studend_ID char(10) NOT NULL,Target_IP char(15))";
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -202,7 +203,7 @@ public class DB {
 		}
 	}
 
-	public static void Drop(String ExamCode, String ExamTime, String ExamRoom) {
+	public void Drop(String ExamCode) {
 		SQLEXECUTER = "DROP TABLE [" + ExamCode + "]";
 
 		try {
