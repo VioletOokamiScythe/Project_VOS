@@ -231,9 +231,6 @@ class ClientManagerThread extends Thread {
 
                     String[] split = text.split("/");
 
-                    for (int i = 0; i < split.length; i++) {
-                         System.out.println(split[i]);
-                    }
                     
                     if (split.length == 2 && split[0].equals("ID")) {
                          TargetID = split[1];

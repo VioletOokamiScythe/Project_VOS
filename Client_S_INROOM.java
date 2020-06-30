@@ -9,9 +9,9 @@ import javax.swing.event.*;
 public class Client_S_INROOM extends JFrame {
 
     static Dial dial = new Dial(12);
-    public static String ID = dial.getCode();
+    public String ID = dial.getCode();
 
-    Socket s = null;
+    static Socket s = null;
     PrintWriter PW;
 
     // 컴포넌트 생성
@@ -22,8 +22,8 @@ public class Client_S_INROOM extends JFrame {
     JLabel label = new JLabel("여기에 주관식 답안 입력");
 
     JTextArea AA = new JTextArea();
-    public JTextArea TA = new JTextArea();
-    public JTextArea SA = new JTextArea();
+    public static JTextArea TA = new JTextArea();
+    JTextArea SA = new JTextArea();
 
     // 패널 생성
     JPanel BasePanel = new JPanel(new BorderLayout(9, 9));
@@ -38,6 +38,12 @@ public class Client_S_INROOM extends JFrame {
     JScrollPane scrollPane1 = new JScrollPane(TA);
     JScrollPane scrollPane2 = new JScrollPane(SA);
 
+    public static void main(String[] args) {
+        Client_S_INROOM CSI = new Client_S_INROOM();
+        temp_Receiver tr= new temp_Receiver();
+
+    }
+
     Client_S_INROOM() {
 
         try {
@@ -46,6 +52,9 @@ public class Client_S_INROOM extends JFrame {
 
             PW.println("ID/" + this.ID);
             PW.flush();
+
+            PlainTextReceiveThread PTRT = new PlainTextReceiveThread(s);
+            PTRT.start();
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -80,6 +89,8 @@ public class Client_S_INROOM extends JFrame {
         AA.addKeyListener(SIRA);
         SA.addKeyListener(SIRA);
 
+        WestPanel.add(temp_Receiver.Panel);
+
         // 컴포넌트 설정
         EXAM_EXIT.setPreferredSize(new Dimension(168, 28));
         WestPanel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 2,
@@ -109,7 +120,7 @@ public class Client_S_INROOM extends JFrame {
         Socket S = null;
 
         try {
-            S = new Socket(ServerIP, 8484);
+            S = new Socket(ServerIP, 16800);
             BufferedInputStream BIS = new BufferedInputStream(S.getInputStream());
             Image_Receive IR = new Image_Receive(WestPanel, BIS);
             IR.start();
@@ -197,6 +208,7 @@ public class Client_S_INROOM extends JFrame {
                         Mission = "TEXT";
                         finalString = "ID/" + ID + "/" + Mission + "/" + SA.getText();
                         SA.setText(null);
+
                     }
                     s = new Socket("violetookamiscythe.iptime.org", 5656);
                     PW.println(finalString);
@@ -212,13 +224,9 @@ public class Client_S_INROOM extends JFrame {
 
     S_InRoom_Action SIRA = new S_InRoom_Action();
 
-    public static void main(String[] args) {
-        Client_S_INROOM CSI = new Client_S_INROOM();
-
-    }
-
 }
 
+// 동작하지 않음
 class Image_Receive extends Thread {
     JPanel westPanel;
     BufferedInputStream BIS;
@@ -230,6 +238,7 @@ class Image_Receive extends Thread {
 
     public void run() {
         try {
+            Socket s = new Socket("violetookamiscythe.iptime.org", 16800);
             while (true) {
                 westPanel.getGraphics().drawImage(ImageIO.read(ImageIO.createImageInputStream(BIS)), 0, 0, westPanel);
             }
@@ -238,5 +247,60 @@ class Image_Receive extends Thread {
         }
 
     }
+
+}
+
+// 동작하지 않음
+class PlainTextReceiveThread extends Thread {
+
+    Socket socket;
+
+    PlainTextReceiveThread(Socket s) {
+        this.socket = s;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        super.run();
+        try {
+            BufferedReader BR = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            String Message;
+            String[] split;
+
+            while (true) {
+                Message = BR.readLine();
+                split = Message.split(">");
+                Client_S_INROOM.TA.append(Message);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+}
+
+class temp_Receiver extends JFrame {
+
+    BufferedInputStream BIS;
+
+    static JPanel Panel = new JPanel();
+
+   temp_Receiver() {
+        
+    setContentPane(Panel);
+    setSize(1600,900);
+    setVisible(true);
+    try {
+
+        Socket s=new Socket("violetookamiscythe.iptime.org",16800);
+         while (true) {
+              Panel.getGraphics().drawImage(ImageIO.read(ImageIO.createImageInputStream(BIS)), 0, 0, Panel);
+           }
+    } catch (Exception e) {
+         //TODO: handle exception
+    }
+   
+   }
 
 }
