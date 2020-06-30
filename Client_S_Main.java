@@ -324,6 +324,8 @@ class Client_S_Save extends JFrame {
 
     // 컴포넌트 생성
     JLabel titleLabel = new JLabel("VOS - Very Objective System");
+    JLabel Student_ID = new JLabel("학번");
+    JTextField Student_IDField = new JTextField();
     JLabel ExamCode = new JLabel("EXAM CODE");
     JTextField ExamCodeField = new JTextField();
     JLabel SubjectName = new JLabel("SUBJECT NAME");
@@ -347,7 +349,7 @@ class Client_S_Save extends JFrame {
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("VOS - Client_S_Save");
-        setSize(450, 392);
+        setSize(450, 448);
         setVisible(true);
         setContentPane(basePanel);
 
@@ -368,7 +370,7 @@ class Client_S_Save extends JFrame {
                             s = new Socket("violetookamiscythe.iptime.org", 5656);
                             outStream = s.getOutputStream();
                             dataOutputStream = new DataOutputStream(outStream);
-                            finalString = Mission + "/" + ExamCodeField.getText() + "/" + SubjectNameField.getText()
+                            finalString = Mission + "/" +Student_IDField.getText()+ "/" + ExamCodeField.getText() + "/" + SubjectNameField.getText()
                                     + "/" + Year + "-" + ExamTimeMONTH.getSelectedItem().toString() + "-"
                                     + ExamTimeDATE.getSelectedItem().toString() + " "
                                     + ExamTimeHOUR.getSelectedItem().toString() + ":"
@@ -385,12 +387,16 @@ class Client_S_Save extends JFrame {
             }
         }
 
+        Listener CSA=new Listener();
+
         // 컴포넌트 설정
         basePanel.add(northPanel, BorderLayout.NORTH);
         basePanel.add(centerPanel, BorderLayout.CENTER);
         basePanel.add(southPanel, BorderLayout.SOUTH);
 
         northPanel.add(titleLabel);
+        centerPanel.add(Student_ID);
+        centerPanel.add(Student_IDField);
         centerPanel.add(ExamCode);
         centerPanel.add(ExamCodeField);
         centerPanel.add(SubjectName);
@@ -410,7 +416,11 @@ class Client_S_Save extends JFrame {
 
         southPanel.add(SaveButton);
 
+        SaveButton.addActionListener(CSA);
+
         titleLabel.setPreferredSize(new Dimension(168, 28));
+        Student_ID.setPreferredSize(new Dimension(168, 28));
+        Student_IDField.setPreferredSize(new Dimension(168, 28));
         ExamCode.setPreferredSize(new Dimension(168, 28));
         ExamCodeField.setPreferredSize(new Dimension(168, 28));
         SubjectName.setPreferredSize(new Dimension(168, 28));
@@ -659,6 +669,7 @@ class Client_S_INROOM extends JFrame {
 
     Client_S_INROOM() {
 
+
         try {
             Socket s = new Socket("violetookamiscythe.iptime.org", 5656);
             PW = new PrintWriter((s.getOutputStream()));
@@ -696,6 +707,7 @@ class Client_S_INROOM extends JFrame {
         SubPanel.add(scrollPane2, BorderLayout.WEST);
         SubPanel.add(Tsend, BorderLayout.EAST);
 
+        getContentPane().addMouseListener(SIRA);
         EXAM_EXIT.addActionListener(SIRA);
         Tsend.addActionListener(SIRA);
         Asend.addActionListener(SIRA);
@@ -716,6 +728,7 @@ class Client_S_INROOM extends JFrame {
         scrollPane2.setPreferredSize(new Dimension(336, 112));
         Asend.setPreferredSize(new Dimension(112, 112));
         Tsend.setPreferredSize(new Dimension(112, 112));
+
         AA.setLineWrap(true);
         TA.setLineWrap(true);
         SA.setLineWrap(true);
@@ -727,24 +740,9 @@ class Client_S_INROOM extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setAlwaysOnTop(false);
         setVisible(true);
-
-        // 이미지 전송 관련
-        String ServerIP = "VioletOokamiScythe.iptime.org";
-        Socket S = null;
-
-        try {
-            S = new Socket(ServerIP, 16800);
-            BufferedInputStream BIS = new BufferedInputStream(S.getInputStream());
-            Image_Receive IR = new Image_Receive(WestPanel, BIS);
-            IR.start();
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
     }
 
-    class S_InRoom_Action extends Thread implements ActionListener, KeyListener {
+    class S_InRoom_Action implements ActionListener, KeyListener, MouseListener {
 
         String finalString;
         String Answer;
@@ -833,6 +831,37 @@ class Client_S_INROOM extends JFrame {
                 }
             }
         }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // TODO Auto-generated method stub
+            PW.println("MOUSECLICK/" + MouseInfo.getPointerInfo().getLocation().x + "/" + MouseInfo.getPointerInfo().getLocation().y);
+            PW.flush();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            // TODO Auto-generated method stub
+
+        }
     }
 
     S_InRoom_Action SIRA = new S_InRoom_Action();
@@ -893,6 +922,8 @@ class PlainTextReceiveThread extends Thread {
     }
 }
 
+
+//폐기
 class temp_Receiver extends JFrame {
 
     BufferedInputStream BIS;

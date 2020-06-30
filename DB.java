@@ -43,7 +43,7 @@ public class DB {
 		}
 	}
 
-	public void Student_Remove(String id){
+	public void Student_Remove(String id) {
 		SQLEXECUTER = "delete from Client_S_INFO_TABLE WHERE [Student ID]='" + id + "'";
 
 		try {
@@ -98,7 +98,7 @@ public class DB {
 		}
 	}
 
-	public void Professor_Remove(String id){
+	public void Professor_Remove(String id) {
 		SQLEXECUTER = "delete from Client_P_INFO_TABLE WHERE ID='" + id + "'";
 
 		try {
@@ -238,6 +238,7 @@ public class DB {
 
 			// TODO: handle exception }
 		}
+
 	}
 
 	public void Drop(String ExamCode) {
@@ -310,7 +311,7 @@ public class DB {
 		}
 	}
 
-	public void SRemove(String Student_ID,String ExamCode){
+	public void SRemove(String Student_ID, String ExamCode) {
 		SQLEXECUTER = "DELETE [" + ExamCode + "] where [" + Student_ID + "]";
 
 		try {
@@ -334,7 +335,7 @@ public class DB {
 		}
 	}
 
-	public void PRemove(String Professor_ID,String ExamCode){
+	public void PRemove(String Professor_ID, String ExamCode) {
 		SQLEXECUTER = "DELETE [" + ExamCode + "] where [" + Professor_ID + "]";
 
 		try {
@@ -357,7 +358,7 @@ public class DB {
 			// TODO: handle exception
 		}
 	}
-	
+
 	public void Rename_Table(String ID, String NID) {
 		SQLEXECUTER = "SP_RENAME [" + ID + "],[" + NID + "]";
 
@@ -384,8 +385,8 @@ public class DB {
 
 	public void Modify(String ID, String PW, String Name, String Major, String NID, String NPW, String NName,
 			String NMajor) {
-		SQLEXECUTER = "UPDATE Client_S_INFO_TABLE SET [Student ID] = '" + NID + "',PW='" + NPW + "',NAME='" + NName + "',Major='"
-				+ NMajor + "' Where [Student ID] = " + ID+"";
+		SQLEXECUTER = "UPDATE Client_S_INFO_TABLE SET [Student ID] = '" + NID + "',PW='" + NPW + "',NAME='" + NName
+				+ "',Major='" + NMajor + "' Where [Student ID] = " + ID + "";
 
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -408,4 +409,51 @@ public class DB {
 		}
 	}
 
+	public void Pindividual(String Professor_ID, String ExamCode, String ExamRoom, String ExamTime) {
+		SQLEXECUTER = "insert into [" + Professor_ID + "] values('" + ExamCode + "','" + ExamRoom + "','" + ExamTime
+				+ "')";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "professor", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception }
+		}
+	}
+
+	public void Sindividual(String Student_ID, String ExamCode, String ExamRoom, String ExamTime){
+		SQLEXECUTER = "insert into [" + Student_ID + "] values('" + ExamCode + "','" + ExamRoom + "','" + ExamTime
+				+ "')";
+
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+		} catch (ClassNotFoundException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			Connection con = DriverManager.getConnection(URL, "student", "1111");
+			Statement stmt = con.createStatement();
+			System.out.println("Successful connection to SQL Server.");
+			stmt.executeUpdate(SQLEXECUTER);
+			System.out.println("Query operation was successful.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Failed connection to SQL Server.");
+
+			// TODO: handle exception }
+		}
+	}
 }

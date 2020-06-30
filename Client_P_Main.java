@@ -300,7 +300,6 @@ class Client_P_Save extends JFrame {
 		add(BValue);
 		BValue.setHorizontalAlignment(JTextField.CENTER);
 
-		t1.setEnabled(false);
 		t3.setEnabled(false);
 		t4.setEnabled(false);
 		t5.setEnabled(false);
@@ -542,7 +541,7 @@ class Client_P_Save extends JFrame {
 						OutputStream outStream;
 						DataOutputStream dataOutputStream;
 						String finalString;
-						String Mission="Create";
+						String Mission="Check2";
 
 						try {
 							s = new Socket("violetookamiscythe.iptime.org", 5656);
@@ -560,12 +559,36 @@ class Client_P_Save extends JFrame {
 							e0.printStackTrace();
 						}
 					}
+					if (e.getSource() == j2) {
+						Socket s = null;
+						OutputStream outStream;
+						DataOutputStream dataOutputStream;
+						String finalString;
+						String Mission="Create";
+
+						try {
+							s = new Socket("violetookamiscythe.iptime.org", 5656);
+							outStream = s.getOutputStream();
+							dataOutputStream = new DataOutputStream(outStream);
+							finalString = Mission+"/"+t1.getText()+"/"+t5.getText() + "/" + "211.250.161.63" + "/"
+									+ placeCombo.getSelectedItem().toString() + "/" + Year + "-"
+									+ monthCombo.getSelectedItem().toString() + "-"
+									+ dayCombo.getSelectedItem().toString() + " "
+									+ timeCombo.getSelectedItem().toString() + ":"
+									+ minuteCombo.getSelectedItem().toString() + ":" + "00" + "." + "0";
+							dataOutputStream.writeUTF(finalString);
+						} catch (Exception e0) {
+							// TODO: handle exception
+							e0.printStackTrace();
+						}
+					}
 				}
 			}
 
 			P_Save_Action2 PSA2=new P_Save_Action2();
 
 			j1.addActionListener(PSA2);
+			j2.addActionListener(PSA2);
 		}
 	}
 }
@@ -656,9 +679,9 @@ class PModify extends JFrame {
 				 }
 			  }
 			  if (e.getSource()==DeleteButton) {
-				 String mission = "PDrop";
+				 String mission = "Drop";
 				 TestCode = ExamCodeField.getText();
-				 String StudentID=new Dial(12).getCode();
+				 String ID=new Dial(12).getCode();
  
 			  if (!(ExamCodeField.equals(""))&&!(ExamCodeField.equals(""))) {
 				 Socket s = null;
@@ -668,7 +691,7 @@ class PModify extends JFrame {
 					s = new Socket("VioletOokamiScythe.iptime.org", 5656);
 					outStream = s.getOutputStream();
 					dataOutputStream = new DataOutputStream(outStream);
-					finalString = mission + "/" + StudentID+ "/" + TestCode;
+					finalString = mission + "/" + ID+ "/" + TestCode;
 					dataOutputStream.writeUTF(finalString);
 				 } catch (Exception e2) {
 					e2.printStackTrace();

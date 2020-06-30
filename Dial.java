@@ -55,7 +55,7 @@ public class Dial extends JFrame {
                     JOptionPane.showMessageDialog(null, "먼저 시험코드를 한번 검사하고 진행하세요.", "오류", JOptionPane.ERROR_MESSAGE);
                     break;
                case 12:// 임시
-                    Code = JOptionPane.showInputDialog(null, "학번을 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
+                    Code = JOptionPane.showInputDialog(null, "학번이나 교번을 입력하세요.", "안내", JOptionPane.QUESTION_MESSAGE);
 
                default:
                     break;

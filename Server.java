@@ -90,15 +90,19 @@ class Login extends Thread {
                         Check_TC(st);
                         break;
 
+                    case "Check2":
+                        Check_EI(st);
+                        break;
+
                     case "Create":
                         CreateE(st);
                         break;
 
-                        case "Drop":
+                    case "Drop":
                         DropE(st);
                         break;
 
-                        case "SDrop":
+                    case "SDrop":
                         SDrop(st);
                         break;
 
@@ -110,12 +114,16 @@ class Login extends Thread {
                         PModifyINFO(st);
                         break;
 
-                        case "SSave":
+                    case "SSave":
                         SSave(st);
                         break;
 
-                    case "PSave":
-                    PSave(st);
+                    case "MOUSECLICK":
+                        // 특정 T_GUEST 로 명령 전송
+                        break;
+
+                    case "SARR":
+                        // 특정 T_GUEST 로 명령 전송
                         break;
 
                     default:
@@ -175,7 +183,7 @@ class Login extends Thread {
         DB.Professor_Remove(ID);
     }
 
-    void Check_TC(StringTokenizer st) {//시험 코드 검사
+    void Check_TC(StringTokenizer st) {// 시험 코드 검사
         String ExamCode = st.nextToken();
 
         ResultSet Result;
@@ -202,7 +210,7 @@ class Login extends Thread {
 
     }
 
-    void Check_EI(StringTokenizer st) {//시험 장소 시간 검사
+    void Check_EI(StringTokenizer st) {// 시험 장소 시간 검사
         String ExamRoom = st.nextToken();
         String ExamTime = st.nextToken();
 
@@ -229,18 +237,22 @@ class Login extends Thread {
         }
     }
 
-    void CreateE(StringTokenizer st) {// 시험 생성
+    void CreateE(StringTokenizer st) {// 시험 생성 및 등록 (연관된 모든 테이블)
+        ID = st.nextToken();
         String ExamCode = st.nextToken();
         String Host_IP = st.nextToken();
         String ExamRoom = st.nextToken();
         String ExamTime = st.nextToken();
 
         DB.CreateEXAM(ExamCode, Host_IP, ExamRoom, ExamTime);
+        DB.Pindividual(ID, ExamCode, ExamRoom, ExamTime);
     }
 
-    void DropE(StringTokenizer st) {//시험 삭제 (시험 자체 테이블 및 EXAM_INFO 테이블)
+    void DropE(StringTokenizer st) {// 시험 삭제 (연관된 모든 테이블)
+        String Professor_ID = st.nextToken();
         String ExamCode = st.nextToken();
         DB.Drop(ExamCode);
+        DB.PRemove(Professor_ID, ExamCode);
     }
 
     void SModifyINFO(StringTokenizer st) {// 학생정보 수정
@@ -271,25 +283,18 @@ class Login extends Thread {
         DB.Rename_Table(ID, NID);
     }
 
-    void SDrop(StringTokenizer st){//시험 삭제(학생 개인 테이블)
+    void SDrop(StringTokenizer st) {// 시험 삭제(학생 개인 테이블)
         String Student_ID = st.nextToken();
         String ExamCode = st.nextToken();
 
         DB.SRemove(Student_ID, ExamCode);
     }
 
-    void PDrop(StringTokenizer st){//시험 삭제(교수 개인 테이블)
-        String Professor_ID = st.nextToken();
+    void SSave(StringTokenizer st) {// 시험 등록(학생 개인 테이블)
+        ID = st.nextToken();
         String ExamCode = st.nextToken();
-
-        DB.PRemove(Professor_ID, ExamCode);
-    }
-
-    void SSave(StringTokenizer st){
-
-    }
-
-    void PSave(StringTokenizer st){
-        
+        String ExamRoom = st.nextToken();
+        String ExamTime = st.nextToken();
+        DB.Sindividual(ID, ExamCode, ExamRoom, ExamTime);
     }
 }
