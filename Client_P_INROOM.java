@@ -55,13 +55,8 @@ public class Client_P_INROOM extends JFrame {
 
      Client_P_INROOM() {
 
-
-
-
             GBC.gridx = 1; GBC.gridy = 0; GBC.gridwidth=1; GBC.gridheight=1;
             GBC.weightx=1; GBC.weighty=1;
-            
-            
             
             GBC2.gridx = 2; GBC2.gridy = 0; GBC2.gridwidth=1; GBC2.gridheight=1;
             GBC2.weightx=1; GBC2.weighty=1;
@@ -89,7 +84,6 @@ public class Client_P_INROOM extends JFrame {
                public void actionPerformed(ActionEvent e) {
                     // TODO Auto-generated method stub
                     dispose();
-                    System.exit(0);
                }
 
 			@Override

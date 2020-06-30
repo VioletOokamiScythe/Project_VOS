@@ -63,7 +63,7 @@ public class Dial extends JFrame {
      }
 
      public static void main(String[] args) {
-
+          new Dial(7);
      }
 
      public String getCode() {
