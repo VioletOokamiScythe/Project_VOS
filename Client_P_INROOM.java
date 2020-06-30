@@ -230,13 +230,26 @@ class ClientManagerThread extends Thread {
                     }
 
                     String[] split = text.split("/");
+
+                    for (int i = 0; i < split.length; i++) {
+                         System.out.println(split[i]);
+                    }
+                    
                     if (split.length == 2 && split[0].equals("ID")) {
                          TargetID = split[1];
                          Client_P_INROOM.TA.append(TargetID + "님이 입장하였습니다.\n");
 
                          continue;
                     }
-                    Client_P_INROOM.TA.append(TargetID + "  >  " + text + "\n");
+
+                    if (split.length == 4 && split[2].equals("TEXT")) {
+                         TargetID = split[1];
+                         Client_P_INROOM.TA.append(TargetID + "  >  " + split[3] + "\n");
+
+                         continue;
+                    }
+
+                    
                }
                Client_P_INROOM.TargetList.remove(new PrintWriter(socket.getOutputStream()));
                socket.close();

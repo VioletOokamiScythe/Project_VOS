@@ -355,7 +355,6 @@ class Client_P_Save extends JFrame {
 					DataOutputStream dataOutputStream;
 					InputStream IS;
 					DataInputStream DIS;
-					String role = "0";
 					String TC = t5.getText();
 					String finalString;
 					String Mission = "Check";
@@ -367,7 +366,7 @@ class Client_P_Save extends JFrame {
 						dataOutputStream = new DataOutputStream(outStream);
 						IS = s.getInputStream();
 						DIS = new DataInputStream(IS);
-						finalString = Mission + "/" + role + "/" + TC;
+						finalString = Mission + "/" +  TC;
 						dataOutputStream.writeUTF(finalString);
 						while (true) {
 							response = DIS.readInt();

@@ -8,23 +8,47 @@ import javax.swing.event.*;
 
 public class Client_S_INROOM extends JFrame {
 
+    static Dial dial = new Dial(12);
+    public static String ID = dial.getCode();
+
+    Socket s = null;
+    PrintWriter PW;
+
     // 컴포넌트 생성
     JButton EXAM_EXIT = new JButton("시험 종료 및 나가기");
-    JButton send = new JButton("입력");
+    JButton Asend = new JButton("입력");
+    JButton Tsend = new JButton("입력");
+
     JLabel label = new JLabel("여기에 주관식 답안 입력");
 
-    JTextArea TA = new JTextArea();
+    JTextArea AA = new JTextArea();
+    public JTextArea TA = new JTextArea();
+    public JTextArea SA = new JTextArea();
 
     // 패널 생성
-    JPanel BasePanel = new JPanel(new BorderLayout());
+    JPanel BasePanel = new JPanel(new BorderLayout(9, 9));
     JPanel CenterPanel = new JPanel(new BorderLayout());
     JPanel WestPanel = new JPanel(new FlowLayout());
     JPanel EastPanel = new JPanel(new FlowLayout());
     JPanel SouthPanel = new JPanel(new FlowLayout());
-    JPanel subSouthPanel = new JPanel(new BorderLayout());
-    JScrollPane SubScrollPanel = new JScrollPane(TA);
+    JPanel subSouthPanel = new JPanel(new BorderLayout(9, 9));
+    JPanel TextPanel = new JPanel(new BorderLayout());
+    JPanel SubPanel = new JPanel(new BorderLayout(9, 9));
+    JScrollPane SubScrollPanel = new JScrollPane(AA);
+    JScrollPane scrollPane1 = new JScrollPane(TA);
+    JScrollPane scrollPane2 = new JScrollPane(SA);
 
     Client_S_INROOM() {
+
+        try {
+            Socket s = new Socket("violetookamiscythe.iptime.org", 5656);
+            PW = new PrintWriter((s.getOutputStream()));
+
+            PW.println("ID/" + this.ID);
+            PW.flush();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
         // 마우스 감지
 
@@ -32,45 +56,29 @@ public class Client_S_INROOM extends JFrame {
         setContentPane(BasePanel);
         BasePanel.add(CenterPanel, BorderLayout.CENTER);
         BasePanel.add(SouthPanel, BorderLayout.SOUTH);
+        BasePanel.add(TextPanel, BorderLayout.EAST);
 
         CenterPanel.add(WestPanel, BorderLayout.WEST);
         CenterPanel.add(EastPanel, BorderLayout.EAST);
         CenterPanel.add(subSouthPanel, BorderLayout.SOUTH);
 
         subSouthPanel.add(SubScrollPanel, BorderLayout.WEST);
-        subSouthPanel.add(send, BorderLayout.EAST);
+        subSouthPanel.add(Asend, BorderLayout.EAST);
         subSouthPanel.add(label, BorderLayout.NORTH);
 
         SouthPanel.add(EXAM_EXIT);
 
+        TextPanel.add(scrollPane1, BorderLayout.NORTH);
+        TextPanel.add(SubPanel, BorderLayout.SOUTH);
+
+        SubPanel.add(scrollPane2, BorderLayout.WEST);
+        SubPanel.add(Tsend, BorderLayout.EAST);
+
         EXAM_EXIT.addActionListener(SIRA);
-        TA.addKeyListener(new KeyListener(){
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // TODO Auto-generated method stub
-                try {
-                    Socket S=new Socket("violetookamiscythe.iptime.org",5656);
-                } catch (Exception e2) {
-                    //TODO: handle exception
-                    e2.printStackTrace();
-                }
-                
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
+        Tsend.addActionListener(SIRA);
+        Asend.addActionListener(SIRA);
+        AA.addKeyListener(SIRA);
+        SA.addKeyListener(SIRA);
 
         // 컴포넌트 설정
         EXAM_EXIT.setPreferredSize(new Dimension(168, 28));
@@ -78,10 +86,16 @@ public class Client_S_INROOM extends JFrame {
                 Toolkit.getDefaultToolkit().getScreenSize().height - 28));
         EastPanel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 2,
                 Toolkit.getDefaultToolkit().getScreenSize().height - 28));
-        SubScrollPanel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width - 112, 112));
-        send.setPreferredSize(new Dimension(112, 112));
-
+        SubScrollPanel.setPreferredSize(new Dimension(Toolkit.getDefaultToolkit().getScreenSize().width - 588, 112));
+        TextPanel.setPreferredSize(new Dimension(448, Toolkit.getDefaultToolkit().getScreenSize().height - 28));
+        scrollPane1.setPreferredSize(new Dimension(448, Toolkit.getDefaultToolkit().getScreenSize().height - 224));
+        scrollPane2.setPreferredSize(new Dimension(336, 112));
+        Asend.setPreferredSize(new Dimension(112, 112));
+        Tsend.setPreferredSize(new Dimension(112, 112));
+        AA.setLineWrap(true);
         TA.setLineWrap(true);
+        SA.setLineWrap(true);
+        TA.setEditable(false);
 
         // 기본설정
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -106,7 +120,11 @@ public class Client_S_INROOM extends JFrame {
 
     }
 
-    class S_InRoom_Action implements ActionListener {
+    class S_InRoom_Action extends Thread implements ActionListener, KeyListener {
+
+        String finalString;
+        String Answer;
+        String Mission;
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -115,10 +133,80 @@ public class Client_S_INROOM extends JFrame {
                 new Client_S_Main();
                 dispose();
             }
-            if (e.getSource()==send) {
-                
+            if (e.getSource() == Asend) {
+
+                Mission = "SARR"; // Send Answer & Refresh Request
+                try {
+
+                    s = new Socket("violetookamiscythe.iptime.org", 5656);
+
+                    finalString = "ID/" + ID + "/" + Mission + "/" + AA.getText();
+                    PW.println(finalString);
+                    PW.flush();
+                    AA.setText(null);
+
+                } catch (Exception e0) {
+                    // TODO: handle exception
+                    e0.printStackTrace();
+                }
             }
 
+            if (e.getSource() == Tsend) {
+
+                Mission = "TEXT";
+                try {
+
+                    s = new Socket("violetookamiscythe.iptime.org", 5656);
+                    finalString = "ID/" + ID + "/" + Mission + "/" + SA.getText();
+                    PW.println(finalString);
+                    PW.flush();
+                    SA.setText(null);
+
+                } catch (Exception e0) {
+                    // TODO: handle exception
+                    e0.printStackTrace();
+                }
+            }
+
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            // TODO Auto-generated method stub
+            if (e.getKeyChar() == 10) {
+                try {
+                    if (AA.isFocusOwner()) {
+                        Mission = "SARR"; // Send Answer & Refresh Request
+                        finalString = "ID/" + ID + "/" + Mission + "/" + AA.getText();
+                        AA.setText(null);
+                    }
+
+                    if (SA.isFocusOwner()) {
+                        Mission = "TEXT";
+                        finalString = "ID/" + ID + "/" + Mission + "/" + SA.getText();
+                        SA.setText(null);
+                    }
+                    s = new Socket("violetookamiscythe.iptime.org", 5656);
+                    PW.println(finalString);
+                    PW.flush();
+
+                } catch (Exception e0) {
+                    // TODO: handle exception
+                    e0.printStackTrace();
+                }
+            }
         }
     }
 
@@ -126,6 +214,7 @@ public class Client_S_INROOM extends JFrame {
 
     public static void main(String[] args) {
         Client_S_INROOM CSI = new Client_S_INROOM();
+
     }
 
 }
