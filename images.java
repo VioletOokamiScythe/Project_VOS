@@ -1,13 +1,11 @@
 import java.io.*;
 import java.net.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.imageio.*;
 
-public class images {
+public class images extends JFrame{
+
      final int w = 1280, h = 720;
 
      final int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - w / 2,
